@@ -1,0 +1,227 @@
+/* SCSS belonging to the project Green City Oasis  */
+
+/*      _________________________________________________________________      */
+/*                                                 I M P O R T S                                                   */
+/*      _________________________________________________________________      */
+
+@import "./base/reset";
+@import "./base/fonts";
+@import "./base/variables";
+@import "./base/mixins";
+
+
+/*      _________________________________________________________________      */
+/*                                                     B O D Y                                                      */
+/*      _________________________________________________________________      */
+
+body {
+     background-color: $grey-dark;
+     @include font;
+}
+
+
+/*      *               *              H E A D E R               *               *      */
+
+header{
+     display: grid;      // grid container for nav
+     grid-template-columns: 12% auto 12%;         // 1/2 = 12%    2/3 = auto    3/4 = 12%
+     background-color: $green-mid;
+     height: 120px;
+     box-shadow: 0px 5px 15px $shadow;
+}
+
+
+/*      *               *              N A V               *               *      */
+
+nav {
+     grid-column: 2 / 3;      // header is grid container, starting with section 2 end ending before section 3 
+     display: grid;
+     height: 120px;
+     align-items: center;
+     img {
+          
+     }
+     ul {
+          margin-left: auto;
+          margin-right: 0px;
+          li {
+               display: inline-block;
+               padding-left: 12vw;
+               text-transform: uppercase;
+               font-weight: 700;
+               font-size: 0.8rem;
+               a{
+                    color: $grey-light;
+               }
+          }
+     }
+}
+
+/*      *               *              M A I N               *               *      */
+
+.maindiv{
+     display: grid;      // grid container for nav
+     grid-template-columns: 12% auto 12%;         // 1/2 = 12%    2/3 = auto    3/4 = 12%
+     main {
+          background-color: $grey-mid;
+          grid-column: 2 / 3;      // header is grid container, starting with section 2 end ending before section 3 
+          box-shadow: -5px 5px 15px grey;
+          min-height: calc( 100vh - 180px  );
+
+     }
+}
+
+/*      *               *              F O O T E R               *               *      */
+
+footer{
+     background-color: $grey-light;
+     height: 60px;
+     position: absolute;
+     bottom: 0px;
+     width: 100vw;
+     box-shadow: 0px -5px 10px $shadow;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// body {
+//   .slider {
+//     width: 800px;
+//     height: 600px;
+//     position: relative;
+//     img {
+//       // &:first-child {
+//       //   opacity: 1;
+//       // }
+//       transition: opacity 300ms;
+//       position: absolute;
+//       left: 0;
+//       top: 0;
+//       &.show {
+//         opacity: 1;
+//       }
+//       &.hide {
+//         opacity: 0;
+//       }
+//       display: block;
+//       width: 800px;
+//       height: 600px;
+//       opacity: 0;
+//     }
+//   }
+//   nav.navigatie {
+//     display: flex;
+//     align-items: center;
+//     & > a {
+//       margin-right: auto;
+//     }
+//     & > ul {
+//       background-color: red;
+//       // height: 75px;
+//       display: flex;
+//       & > li {
+//         position: relative;
+//         &:hover {
+//           ul {
+//             opacity: 1;
+//           }
+//         }
+//         a {
+//         }
+//       }
+//       li {
+//         margin: 0 20px;
+//         a {
+//         }
+//         ul {
+//           position: absolute;
+//           transition: opacity 0.4s;
+//           left: 0;
+//           top: 16px;
+//           opacity: 0;
+//           padding: 20px;
+//           background-color: green;
+//           li {
+//             margin: 0;
+//             white-space: nowrap;
+//           }
+//         }
+//       }
+//     }
+//   }
+//   p {
+//     color: $green !important;
+//     font-family: $primary-font;
+//   }
+//   #container {
+//     img {
+//       @include responsive();
+//     }
+//   }
+//   .grid {
+//     @include make-col(5, 20px);
+//     div {
+//       background-color: blue;
+//       img {
+//         @include responsive;
+//       }
+//     }
+//   }
+// }
+
+// @media screen and (max-width: 900px) {
+//   p {
+//     color: $red;
+//   }
+// }
+
+// @media screen and(max-width: 1000px) {
+//   body {
+//     .grid {
+//       @include make-col(4, 20px);
+//     }
+//   }
+// }
+// @media screen and(max-width: 800px) {
+//   body {
+//     .grid {
+//       @include make-col(3, 20px);
+//     }
+//   }
+// }
+// @media screen and(max-width: 600px) {
+//   body {
+//     .grid {
+//       @include make-col(2, 10px);
+//     }
+//   }
+// }
+// @media screen and(max-width: 400px) {
+//   body {
+//     .grid {
+//       @include make-col(1, 0px);
+//     }
+//   }
+// }
