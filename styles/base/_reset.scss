@@ -1,13 +1,13 @@
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+     box-sizing: border-box;
+     margin: 0;
+     padding: 0;
 }
 
 .clearfix::after {
-  clear: both;
-  content: "";
-  display: block;
+     clear: both;
+     content: "";
+     display: block;
 }
 
 
@@ -55,4 +55,8 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+
+html {
+     font-size: 62.5%;
 }

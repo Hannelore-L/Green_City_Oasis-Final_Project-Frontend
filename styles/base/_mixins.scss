@@ -4,7 +4,7 @@
 
 @mixin font (
      $fontweight: 400, 
-     $fontsize: 100%, 
+     $fontsize: 1.6rem, 
      $fontfamily: $primary-font, 
      $fontstyle: normal, 
      $lineheight: 1.6, 
@@ -30,46 +30,46 @@
 
 
 @mixin responsive {
-  display: block;
-  height: auto;
-  width: 100%;
+     display: block;
+     height: auto;
+     width: 100%;
 }
 
 @mixin fix {
-  &::after {
-    clear: both;
-    content: "";
-    display: block;
-  }
+     &::after {
+          clear: both;
+          content: "";
+          display: block;
+     }
 }
 
 @mixin make-col($cols, $gap) {
-  display: flex;
-  flex-wrap: wrap;
+     display: flex;
+     flex-wrap: wrap;
 
-  > *:nth-child(1n + 0) {
-    margin: 0 $gap $gap 0;
-    width: calc((100% - #{($cols - 1) * $gap}) / #{$cols});
-  }
+     > *:nth-child(1n + 0) {
+          margin: 0 $gap $gap 0;
+          width: calc((100% - #{($cols - 1) * $gap}) / #{$cols});
+     }
 
-  > *:nth-child(#{$cols}n + 0) {
-    margin-right: 0;
-  }
+     > *:nth-child(#{$cols}n + 0) {
+          margin-right: 0;
+     }
 }
 
 @mixin make-col-old($cols: 4, $gap: 20px) {
-  @include fix;
+     @include fix;
 
-  > * {
-    display: block;
-    float: left;
-    margin-bottom: $gap;
-    margin-right: $gap;
-    min-height: 50px;
-    width: calc((100% - #{($cols - 1) * $gap}) / #{$cols});
-  }
+     > * {
+          display: block;
+          float: left;
+          margin-bottom: $gap;
+          margin-right: $gap;
+          min-height: 50px;
+          width: calc((100% - #{($cols - 1) * $gap}) / #{$cols});
+     }
 
-  > *:nth-child(#{$cols}n + 0) {
-    margin-right: 0;
-  }
+     > *:nth-child(#{$cols}n + 0) {
+          margin-right: 0;
+     }
 }
