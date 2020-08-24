@@ -5,90 +5,31 @@ import axios from 'axios';
 //        -        -        -        L O C A L   I M P O R T S        -        -        -
 import Layout from '../components/Layout';
 
-
 //        -        -        -        E X P O R T   I N D E X        -        -        -
-export default () => {
+
+export default ({ locations }) => {
 	return (
-		<Layout
-			title="Homepage"
-			description="You are currently on the homepage"
-		>
-
-			<p>It's working</p>
-
+		<Layout title="Startpagina" description="U bent op de startpagina">
+			{locations.map(({ id, name, addressText }) => (
+				<p key={id}>
+					{name} {addressText}
+				</p>
+			))}
 		</Layout>
 	); //     end of return
 }; //     end of export
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// getserversideprops that's not working yet
-
-
-// export default ( { locations } ) => {
-// 	return (
-// 		<Layout
-// 			title="Homepage"
-// 			description="You are currently on the homepage"
-// 		>
-
-// 			<p>It's working</p>
-
-//                { locations.map( ( { id, locationTitle, locationAddressText } ) => (
-
-//                     <p key={ id }>
-//                          { locationTitle }  { locationAddressText }
-//                     </p>
-
-//                ) ) };
-
-
-// 		</Layout>
-// 	); //     end of return
-// }; //     end of export
-
-
-// //        -        -        -        S E R V E R   S I D E   P R O P S        -        -        -
-// export const getServerSideProps = async () => {
-//      const result = await axios.get("http://localhost:8000/api//locations?page=1");
-//      // console.log( result );
-//      return {
-//           props:{
-//                locations: result.data[ "hydra:member" ]
-//           }
-//      }; //     end of return
-// } // end of GetStaticProps
-
-
-
-
-
-
-
-
-
-
-
-
-
+//        -        -        -        S E R V E R   S I D E   P R O P S        -        -        -
+export const getServerSideProps = async () => {
+	const result = await axios.get('https://wdev.be/wdev_hannelore/eindwerk/api/locations?page=1');
+	return {
+		props: {
+			locations: result.data['hydra:member'],
+		},
+	}; //     end of return
+}; // end of GetStaticProps
 
 // what was originally on this page
-
-
 
 // import Head from 'next/head'
 // import styles from '../styles/Home.module.css'

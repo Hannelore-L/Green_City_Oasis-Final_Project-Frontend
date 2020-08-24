@@ -6,29 +6,32 @@
 
 //      -               -               G R E E N S :  F U L L               -               -
 
-$green-dark: rgb( 23, 38, 1 );         //   hex  #172601
-$green-mid: rgb( 69, 89, 39 );        //   hex  #455927
-$green-light: rgb( 110, 140, 83 );   //   hex  #6E8C53
-
+$green-dark: rgb(23, 38, 1); //   hex  #172601
+$green-mid: rgb(69, 89, 39); //   hex  #455927
+$green-light: rgb(110, 140, 83); //   hex  #6E8C53
 
 //      -               -               G R E E N S :  S H E E R               -               -
 
-$green-light-sheer: rgba( 110, 140, 83, 0.6 );
-
+$green-light-sheer: rgba(110, 140, 83, 0.6);
 
 //      -               -               M O N O C H R O M E :  F U L L               -               -
 
-$grey-dark: rgb( 210, 210, 210 );  //   hex  #D2D2D2
-$grey-mid: rgb( 225, 225, 225 );   //   hex  #E1E1E1
-$grey-light: rgb( 241, 241, 241 );  //   hex  #F1F1F1
-
+$grey-dark: rgb(210, 210, 210); //   hex  #D2D2D2
+$grey-mid: rgb(225, 225, 225); //   hex  #E1E1E1
+$grey-light: rgb(241, 241, 241); //   hex  #F1F1F1
 
 //      -               -               S H A D O W   C O L O U R               -               -
-$shadow: rgb( 191, 191, 191 );     //   hex #BFBFBF
-
+$shadow: rgb(191, 191, 191); //   hex #BFBFBF
 
 //      ___________________________________________________________________________
 //     |                                         F O N T   M A P P I N G S                                          |
 //      ___________________________________________________________________________
 
-$primary-font: "Comfortaa";
+$primary-font: 'Comfortaa';
+
+//      ___________________________________________________________________________
+//     |                                     R A N D O M   V A R I A B L E S                                     |
+//      ___________________________________________________________________________
+
+$header-height: 100px;
+$footer-height: 60px;
