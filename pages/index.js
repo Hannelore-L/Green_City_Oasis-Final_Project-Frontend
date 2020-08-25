@@ -4,16 +4,17 @@ import axios from 'axios';
 
 //        -        -        -        L O C A L   I M P O R T S        -        -        -
 import Layout from '../components/Layout';
+import { slugify } from '../helper';
 
 //        -        -        -        E X P O R T   I N D E X        -        -        -
 
 export default ({ locations }) => {
 	return (
-		<Layout title="Startpagina" description="U bent op de startpagina">
+		<Layout title="Green City Oasis || Startpagina" description="U bent op de startpagina">
 			{locations.map(({ id, name, addressText }) => (
-				<p key={id}>
+				<a key={id} href={`/locatie/${id}/${slugify(name)}`}>
 					{name} {addressText}
-				</p>
+				</a>
 			))}
 		</Layout>
 	); //     end of return

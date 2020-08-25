@@ -77,7 +77,7 @@ header {
 		grid-column: 2 / 3; // header is grid container, starting with section 2 end ending before section 3
 		box-shadow: -5px 5px 15px grey;
 		min-height: calc(100vh - 160px);
-		padding: 2rem;
+		padding: 10rem;
 		margin-top: $header-height;
 	} //   main
 } //   .maindiv

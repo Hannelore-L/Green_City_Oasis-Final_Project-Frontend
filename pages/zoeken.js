@@ -9,7 +9,7 @@ import Layout from '../components/Layout';
 
 export default ({ locations }) => {
 	return (
-		<Layout title="Zoekpagina" description="U bent op de zoekpagina">
+		<Layout title="Green City Oasis || Zoeken" description="U bent op de zoekpagina">
 			{locations.map(({ id, name, addressText }) => (
 				<p key={id}>
 					{name} {addressText}
