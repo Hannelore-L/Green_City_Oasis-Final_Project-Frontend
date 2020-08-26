@@ -9,7 +9,11 @@ export default function Menu() {
 		<>
 			<nav className="nav">
 				<ul>
-					<li></li>
+					<li>
+						<a href="/" alt="Ga naar de home pagina" id="gco">
+							Green City Oasis
+						</a>
+					</li>
 
 					<li>
 						<a href="/" alt="Ga naar de home pagina">

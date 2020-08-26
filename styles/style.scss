@@ -1,7 +1,9 @@
 /* SCSS belonging to the project Green City Oasis  */
 
 /*      _________________________________________________________________      */
+/*      _________________________________________________________________      */
 /*                                                 I M P O R T S                                                   */
+/*      _________________________________________________________________      */
 /*      _________________________________________________________________      */
 
 @import './base/reset';
@@ -10,7 +12,9 @@
 @import './base/mixins';
 
 /*      _________________________________________________________________      */
+/*      _________________________________________________________________      */
 /*                                                     B O D Y                                                      */
+/*      _________________________________________________________________      */
 /*      _________________________________________________________________      */
 
 body {
@@ -18,7 +22,9 @@ body {
 	@include font;
 } //   body
 
-/*      *               *              H E A D E R               *               *      */
+/*      _________________________________________________________________      */
+/*                                                  H E A D E R                                                    */
+/*      _________________________________________________________________      */
 
 header {
 	position: fixed;
@@ -27,7 +33,7 @@ header {
 	background-color: $green-mid;
 	height: $header-height;
 	width: 100%;
-	box-shadow: 0px 5px 15px grey;
+	box-shadow: 0px -20px 25px 15px black;
 	img {
 		position: fixed;
 		height: 150px;
@@ -35,7 +41,9 @@ header {
 		left: calc(12vw - 75px);
 	} //   img
 
-	/*      *               *              N A V               *               *      */
+	/*      _________________________________________________________________      */
+	/*                                                      N A V                                                        */
+	/*      _________________________________________________________________      */
 
 	nav {
 		grid-column: 2 / 3; // header is grid container, starting with section 2 end ending before section 3
@@ -60,14 +68,22 @@ header {
 					transition: all 500ms ease;
 					&:hover {
 						border: 3px solid white;
-					} //   hover
+					} //   :hover
+					&#gco {
+						@include font(400, 2.5rem, $header-font, normal, 2, left, 0.1em);
+						&:hover {
+							border: none;
+						} //   :hover
+					} //   #gco
 				} //   a
 			} //   li
 		} //   ul
 	} //   nav
 } //   header
 
-/*      *               *              M A I N               *               *      */
+/*      _________________________________________________________________      */
+/*                                                     M A I N                                                      */
+/*      _________________________________________________________________      */
 
 .maindiv {
 	display: grid; // grid container for nav
@@ -75,14 +91,49 @@ header {
 	main {
 		background-color: $grey-mid;
 		grid-column: 2 / 3; // header is grid container, starting with section 2 end ending before section 3
-		box-shadow: -5px 5px 15px grey;
+		box-shadow: 0px 0px 15px grey;
 		min-height: calc(100vh - 160px);
-		padding: 10rem;
 		margin-top: $header-height;
+
+		/*      *               *              I N D E X               *               *      */
+
+		section#home_message {
+			background: $green-dark url('../public/images/homepage_header.jpg') top center/cover no-repeat fixed;
+			color: $grey-mid;
+			transition: all 500ms ease;
+			text-shadow: 2px 3px 3px #000;
+			padding: 5rem 10rem;
+			article {
+				background: rgba(0, 0, 0, 0.8);
+				padding: 5rem 7rem;
+				border-radius: 3rem;
+			} //   article
+			h2 {
+				@include font(700, 3rem, $primary-font, normal, 2, right, 0.2em);
+			} //   h2
+			p {
+				@include font(400, 1.6rem, $primary-font, normal, 2, left, 0em);
+				padding-top: 2rem;
+				width: 40vw;
+			} //   p
+		} //   section.home_message
+		section#home_spotlight {
+			min-height: 500px;
+			background-color: $grey-light;
+			box-shadow: -5px 5px 10px rgb(180, 180, 180);
+			margin: 7rem 10rem;
+			padding: 5rem;
+			h3 {
+				@include font(700, 2rem, $primary-font, normal, 2, left, 0.1em);
+				color: $green-dark;
+			} //   h3
+		} //   section#home_spotlight
 	} //   main
 } //   .maindiv
 
-/*      *               *              F O O T E R               *               *      */
+/*      _________________________________________________________________      */
+/*                                                  F O O T E R                                                    */
+/*      _________________________________________________________________      */
 
 footer {
 	position: fixed;
@@ -90,14 +141,14 @@ footer {
 	background-color: $grey-light;
 	height: $footer-height;
 	width: 100%;
-	box-shadow: 0px -5px 10px $shadow;
+	box-shadow: 0px 27px 25px 15px black;
 	nav {
 		height: $footer-height;
 		ul {
 			height: $footer-height;
 			&:first-child {
 				margin-left: 4vw;
-			}
+			} //   :first-child
 			li {
 				display: inline-block;
 				vertical-align: middle;

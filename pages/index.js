@@ -11,18 +11,36 @@ import { slugify } from '../helper';
 export default ({ locations }) => {
 	return (
 		<Layout title="Green City Oasis || Startpagina" description="U bent op de startpagina">
-			{locations.map(({ id, name, addressText }) => (
-				<a key={id} href={`/locatie/${id}/${slugify(name)}`}>
-					{name} {addressText}
-				</a>
-			))}
+			<section id="home_message">
+				<article>
+					<h2>Welkom op Green City Oasis!</h2>
+					<p>
+						Green City Oasis, dé place to be als je een groen stukje rust, sport of plezier zoekt in
+						het hartje van Leuven. De stad lijkt soms een betonnen wildernis en daarom wil Green City
+						Oasis het tegendeel bewijzen door Leuven’s groene wonderen voor U op te lijsten!
+					</p>
+				</article>
+			</section>
+			<section id="home_spotlight">
+				<h3>Spotlight!</h3>
+				<p>De meest recent toegevoegde locaties!</p>
+				{/* {locations.map(({ id, name, addressText }) => (
+					<article>
+						<a key={id} href={`/locatie/${id}/${slugify(name)}`}>
+							{name}
+						</a>
+					</article>
+				))} */}
+			</section>
 		</Layout>
 	); //     end of return
 }; //     end of export
 
 //        -        -        -        S E R V E R   S I D E   P R O P S        -        -        -
 export const getServerSideProps = async () => {
-	const result = await axios.get('https://wdev.be/wdev_hannelore/eindwerk/api/locations?page=1');
+	const result = await axios.get(
+		'https://wdev.be/wdev_hannelore/eindwerk/api/locations?order%5BcreatedAt%5D=desc&page=1'
+	);
 	return {
 		props: {
 			locations: result.data['hydra:member'],
