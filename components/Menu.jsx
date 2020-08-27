@@ -10,13 +10,13 @@ export default function Menu() {
 			<nav className="nav">
 				<ul>
 					<li>
-						<a href="/" alt="Ga naar de home pagina" id="gco">
+						<a href="/" alt="Ga naar de start pagina" id="gco">
 							Green City Oasis
 						</a>
 					</li>
 
 					<li>
-						<a href="/" alt="Ga naar de home pagina">
+						<a href="/" alt="Ga naar de start pagina">
 							Home
 						</a>
 					</li>

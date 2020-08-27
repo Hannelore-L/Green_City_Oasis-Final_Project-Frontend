@@ -33,13 +33,15 @@ header {
 	background-color: $green-mid;
 	height: $header-height;
 	width: 100%;
-	box-shadow: 0px -20px 25px 15px black;
-	img {
+	box-shadow: 0px -20px 25px 15px $shadow-dark;
+	a#logo {
 		position: fixed;
-		height: 150px;
 		top: 25px;
 		left: calc(12vw - 75px);
-	} //   img
+		img {
+			height: 150px;
+		} //   img
+	} //   a#logo
 
 	/*      _________________________________________________________________      */
 	/*                                                      N A V                                                        */
@@ -70,7 +72,7 @@ header {
 						border: 3px solid white;
 					} //   :hover
 					&#gco {
-						@include font(400, 2.5rem, $header-font, normal, 2, left, 0.1em);
+						@include font(400, 2.7rem, $header-font, normal, 2, left, 0.1em);
 						&:hover {
 							border: none;
 						} //   :hover
@@ -91,17 +93,19 @@ header {
 	main {
 		background-color: $grey-mid;
 		grid-column: 2 / 3; // header is grid container, starting with section 2 end ending before section 3
-		box-shadow: 0px 0px 15px grey;
+		box-shadow: 0px 0px 15px $shadow-mid;
 		min-height: calc(100vh - 160px);
 		margin-top: $header-height;
 
 		/*      *               *              I N D E X               *               *      */
 
+		//   -    home_message   -
+
 		section#home_message {
 			background: $green-dark url('../public/images/homepage_header.jpg') top center/cover no-repeat fixed;
 			color: $grey-mid;
 			transition: all 500ms ease;
-			text-shadow: 2px 3px 3px #000;
+			text-shadow: 2px 3px 3px $shadow-dark;
 			padding: 5rem 10rem;
 			article {
 				background: rgba(0, 0, 0, 0.8);
@@ -117,17 +121,60 @@ header {
 				width: 40vw;
 			} //   p
 		} //   section.home_message
+
+		//   -    home_spotlight   -
+
 		section#home_spotlight {
 			min-height: 500px;
 			background-color: $grey-light;
-			box-shadow: -5px 5px 10px rgb(180, 180, 180);
-			margin: 7rem 10rem;
+			box-shadow: -5px 5px 10px $shadow-light;
+			margin: $container-margin;
 			padding: 5rem;
 			h3 {
 				@include font(700, 2rem, $primary-font, normal, 2, left, 0.1em);
-				color: $green-dark;
+				color: $green-mid;
 			} //   h3
+			div.grid_container {
+				display: grid; // grid container for nav
+				grid-template-columns: 1fr 1fr 1fr; // 1/2 = 1fr    2/3 = 1fr    3/4 = 1fr
+				grid-gap: 5rem;
+				padding-top: 3rem;
+				article {
+					@include font(700, 1.8rem, $primary-font, normal, 2, left, 0.1em);
+					min-height: 250px;
+					background: $faux-white;
+					border: 0.5px dotted $green-light;
+					box-shadow: -2px 2px 10px $shadow-light;
+					padding: 3rem;
+					font-variant: small-caps;
+					color: $green-dark;
+				} //   article
+			} //   div.grid_container
 		} //   section#home_spotlight
+
+		/*      *               *              D E T A I L               *               *      */
+
+		article.detail {
+			display: grid; // grid container for section
+			grid-template-columns: 1fr 5fr; // 1/2 = 1fr    2/3 = 5fr
+			grid-gap: 10rem;
+			margin: $container-margin;
+			section.location_image {
+				background: $grey-light;
+				box-shadow: -2px 2px 10px $shadow-light;
+				height: 200px;
+				width: 200px;
+				background-color: #fff;
+			}
+			section.location_info {
+				background: $grey-light;
+				box-shadow: -2px 2px 10px $shadow-light;
+			}
+			section.location_description {
+				background: $grey-light;
+				box-shadow: -2px 2px 10px $shadow-light;
+			}
+		}
 	} //   main
 } //   .maindiv
 
@@ -141,7 +188,7 @@ footer {
 	background-color: $grey-light;
 	height: $footer-height;
 	width: 100%;
-	box-shadow: 0px 27px 25px 15px black;
+	box-shadow: 0px 27px 25px 15px $shadow-dark;
 	nav {
 		height: $footer-height;
 		ul {
@@ -162,6 +209,9 @@ footer {
 					&:hover {
 						color: $green-light;
 					} //   hover
+					&#gco {
+						display: none;
+					} //   #gco
 				} //   a
 			} //   li
 		} //   ul

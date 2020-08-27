@@ -24,13 +24,15 @@ export default ({ locations }) => {
 			<section id="home_spotlight">
 				<h3>Spotlight!</h3>
 				<p>De meest recent toegevoegde locaties!</p>
-				{/* {locations.map(({ id, name, addressText }) => (
-					<article>
-						<a key={id} href={`/locatie/${id}/${slugify(name)}`}>
-							{name}
-						</a>
-					</article>
-				))} */}
+				<div className="grid_container">
+					{locations.map(({ id, name, addressText }) => (
+						<article>
+							<a key={id} href={`/locatie/${id}/${slugify(name)}`}>
+								{name}
+							</a>
+						</article>
+					))}
+				</div>
 			</section>
 		</Layout>
 	); //     end of return
@@ -39,7 +41,7 @@ export default ({ locations }) => {
 //        -        -        -        S E R V E R   S I D E   P R O P S        -        -        -
 export const getServerSideProps = async () => {
 	const result = await axios.get(
-		'https://wdev.be/wdev_hannelore/eindwerk/api/locations?order%5BcreatedAt%5D=desc&page=1'
+		'https://wdev.be/wdev_hannelore/eindwerk/api/locations?isDeleted=false&order%5BcreatedAt%5D=desc&page=1'
 	);
 	return {
 		props: {

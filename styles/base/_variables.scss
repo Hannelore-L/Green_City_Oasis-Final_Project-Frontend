@@ -19,6 +19,13 @@ $green-light-sheer: rgba(110, 140, 83, 0.6);
 $grey-dark: rgb(210, 210, 210); //   hex  #D2D2D2
 $grey-mid: rgb(225, 225, 225); //   hex  #E1E1E1
 $grey-light: rgb(241, 241, 241); //   hex  #F1F1F1
+$faux-white: rgb(247, 247, 247); //   hex  #F7F7F7
+
+//      -               -               S H A D O W               -               -
+
+$shadow-dark: black;
+$shadow-mid: grey;
+$shadow-light: rgb(180, 180, 180);
 
 //      ___________________________________________________________________________
 //     |                                         F O N T   M A P P I N G S                                          |
@@ -33,3 +40,4 @@ $header-font: 'Nothing You Could Do';
 
 $header-height: 100px;
 $footer-height: 60px;
+$container-margin: 7rem 10rem;

@@ -9,7 +9,7 @@ export default function Header() {
 	return (
 		<header>
 			<Menu />
-			<a href="/">
+			<a href="/" alt="Ga naar de start pagina" id="logo">
 				<img src="/images/logo.png" alt="Website logo" />
 			</a>
 		</header>

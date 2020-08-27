@@ -8,15 +8,39 @@ import { useRouter } from 'next/router';
 import Layout from '../../../components/Layout';
 import { slugify } from '../../../helper';
 
-//        -        -        -        E X P O R T   I N D E X        -        -        -
+//        -        -        -        E X P O R T   D E T A I L        -        -        -
 
-function Post(props) {
-	// return <p>{JSON.stringify(props)}</p>;
+function Detail(props) {
 	return (
-		<div>
-			<h1>{props.name}</h1>
-			<div dangerouslySetInnerHTML={{ __html: props.description }} />
-		</div>
+		<Layout title={`Green City Oasis || ${props.name}`} description={`Dit is de detail pagina van ${props.name}`}>
+			<article className="detail">
+				<section className="left_side">
+					<section className="location_image"></section>
+
+					<section className="location_info">
+						<p>
+							Unieke eigenschap: <span>{props.uniqueProperty}</span>
+						</p>
+						<p>
+							Adres: <span>{props.addressText}</span>
+						</p>
+						<p>
+							<span>Tags:</span>
+							{props['tags'].map(({ id, name }) => (
+								<span key={id}>{name}</span>
+							))}
+						</p>
+					</section>
+				</section>
+
+				<section className="right_side">
+					<section className="location_description">
+						<h1>{props.name}</h1>
+						<div dangerouslySetInnerHTML={{ __html: props.description }} />
+					</section>
+				</section>
+			</article>
+		</Layout>
 	);
 
 	const router = useRouter();
@@ -58,4 +82,4 @@ export async function getStaticProps({ params }) {
 	};
 }
 
-export default Post;
+export default Detail;
