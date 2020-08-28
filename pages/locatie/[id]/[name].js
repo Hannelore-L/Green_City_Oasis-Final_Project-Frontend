@@ -15,28 +15,45 @@ function Detail(props) {
 		<Layout title={`Green City Oasis || ${props.name}`} description={`Dit is de detail pagina van ${props.name}`}>
 			<article className="detail">
 				<section className="left_side">
-					<section className="location_image"></section>
+					<section className="location_image">
+						{/* <img
+							src={`https://wdev.be/wdev_hannelore/eindwerk/system/images/${props['images'][0].fileName}`}
+							alt={`Foto van ${props.name}`}
+						/> */}
+						<img
+							src={`https://wdev.be/wdev_hannelore/eindwerk/system/images/pleintje-paep-thoon-1-5f48e1b48e9b1086281535.jpg`}
+							alt={`Foto van ${props.name}`}
+						/>
+					</section>
 
 					<section className="location_info">
-						<p>
-							Unieke eigenschap: <span>{props.uniqueProperty}</span>
-						</p>
-						<p>
-							Adres: <span>{props.addressText}</span>
-						</p>
-						<p>
-							<span>Tags:</span>
-							{props['tags'].map(({ id, name }) => (
-								<span key={id}>{name}</span>
-							))}
-						</p>
+						<p className="info">Unieke eigenschap: </p>
+						<p>{props.uniqueProperty}</p>
+
+						<p className="info">Adres: </p>
+						<p>{props.addressText}</p>
+
+						<p className="info">Tags:</p>
+						<p className="tag">Tag </p>
+						<p className="tag">Tag </p>
+						<p className="tag">Tag </p>
+						<p className="tag">Tag </p>
+						<p className="tag">Tag </p>
+						<p className="tag">Tag </p>
+						<p className="tag">Tag </p>
+						<p className="tag">Tag </p>
+						{/* {props['tags'].map(({ id, name }) => (
+                                   <p className="tag" key={id}>
+                                        {name}
+                                   </p>
+                              ))} */}
 					</section>
 				</section>
 
 				<section className="right_side">
 					<section className="location_description">
 						<h1>{props.name}</h1>
-						<div dangerouslySetInnerHTML={{ __html: props.description }} />
+						<div className="text" dangerouslySetInnerHTML={{ __html: props.description }} />
 					</section>
 				</section>
 			</article>

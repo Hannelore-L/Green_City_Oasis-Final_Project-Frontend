@@ -28,8 +28,19 @@ export default ({ locations }) => {
 					{locations.map(({ id, name, addressText }) => (
 						<article>
 							<a key={id} href={`/locatie/${id}/${slugify(name)}`}>
-								{name}
+								<p>{name}</p>
+								<p className="index_imgs">
+									<img
+										src={`https://wdev.be/wdev_hannelore/eindwerk/system/images/pleintje-paep-thoon-1-5f48e1b48e9b1086281535.jpg`}
+										alt={`Foto van ${name}`}
+									/>
+								</p>
 							</a>
+							{/* <img
+								src={`https://wdev.be/wdev_hannelore/eindwerk/system/images/${locations['images'][0].fileName}`}
+								alt={`Foto van ${props.name}`}
+							/> */}
+							<button>Toon op de map</button>
 						</article>
 					))}
 				</div>
