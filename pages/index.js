@@ -1,10 +1,15 @@
 //        -        -        -        R E A C T ' S   I M P O R T S        -        -        -
 import React from 'react';
 import axios from 'axios';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import Modal from 'react-modal';
 
 //        -        -        -        L O C A L   I M P O R T S        -        -        -
 import Layout from '../components/Layout';
 import { slugify } from '../helper';
+
+Modal.setAppElement('#__next');
 
 //        -        -        -        E X P O R T   I N D E X        -        -        -
 
@@ -27,24 +32,35 @@ export default ({ locations }) => {
 				<div className="grid_container">
 					{locations.map(({ id, name, addressText }) => (
 						<article>
-							<a key={id} href={`/locatie/${id}/${slugify(name)}`}>
-								<p>{name}</p>
-								<p className="index_imgs">
-									<img
-										src={`https://wdev.be/wdev_hannelore/eindwerk/system/images/pleintje-paep-thoon-1-5f48e1b48e9b1086281535.jpg`}
-										alt={`Foto van ${name}`}
-									/>
-								</p>
-							</a>
-							{/* <img
-								src={`https://wdev.be/wdev_hannelore/eindwerk/system/images/${locations['images'][0].fileName}`}
-								alt={`Foto van ${props.name}`}
-							/> */}
-							<button>Toon op de map</button>
+							<Link
+								href={`/locatie/[id]/[name]?id=${id},name=${slugify(name)}`}
+								as={`/locatie/${id}/${slugify(name)}`}
+							>
+								<a key={id}>
+									<p>{name}</p>
+									<p className="index_imgs">
+										<img
+											src={`https://wdev.be/wdev_hannelore/eindwerk/system/images/pleintje-paep-thoon-1-5f48e1b48e9b1086281535.jpg`}
+											alt={`Foto van ${name}`}
+										/>
+										{/* <img
+											src={`https://wdev.be/wdev_hannelore/eindwerk/system/images/${locations['images'][0].fileName}`}
+											alt={`Foto van ${props.name}`}
+										/> */}
+									</p>
+								</a>
+							</Link>
+							<Link href={`/`} as={`/`}>
+								<a className="modal">Toon op de kaart</a>
+							</Link>
 						</article>
 					))}
 				</div>
 			</section>
+
+			<Modal isOpen={false}>
+				<div>in the modal</div>
+			</Modal>
 		</Layout>
 	); //     end of return
 }; //     end of export

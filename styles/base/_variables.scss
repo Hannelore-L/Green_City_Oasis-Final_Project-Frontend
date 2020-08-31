@@ -27,6 +27,9 @@ $shadow-dark: black;
 $shadow-mid: grey;
 $shadow-light: rgb(180, 180, 180);
 
+//      -               -               S H A D O W               -               -
+$error: rgb(140, 15, 35); //   hex  #8c0f23
+
 //      ___________________________________________________________________________
 //     |                                         F O N T   M A P P I N G S                                          |
 //      ___________________________________________________________________________
@@ -40,4 +43,5 @@ $header-font: 'Nothing You Could Do';
 
 $header-height: 100px;
 $footer-height: 60px;
+$main-height: calc(100vh - #{$header-height} - #{$footer-height});
 $container-margin: 7rem 10rem;

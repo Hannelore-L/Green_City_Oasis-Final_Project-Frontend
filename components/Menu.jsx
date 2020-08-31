@@ -1,5 +1,6 @@
 //        -        -        -        R E A C T ' S   I M P O R T S        -        -        -
 import React from 'react';
+import Link from 'next/link';
 
 //        -        -        -        L O C A L   I M P O R T S        -        -        -
 
@@ -10,27 +11,31 @@ export default function Menu() {
 			<nav className="nav">
 				<ul>
 					<li>
-						<a href="/" alt="Ga naar de start pagina" id="gco">
-							Green City Oasis
-						</a>
+						<Link href="/">
+							<a title="Ga naar de start pagina" id="gco">
+								Green City Oasis
+							</a>
+						</Link>
 					</li>
 
 					<li>
-						<a href="/" alt="Ga naar de start pagina">
-							Home
-						</a>
+						<Link href="/">
+							<a title="Ga naar de start pagina">Home</a>
+						</Link>
 					</li>
 
 					<li>
-						<a href="/zoeken" alt="Ga naar de zoek pagina">
-							Zoeken
-						</a>
+						<Link href="/zoeken">
+							<a href="/zoeken" title="Ga naar de zoek pagina">
+								Zoeken
+							</a>
+						</Link>
 					</li>
 
 					<li>
-						<a href="/over-ons" alt="Ga naar de over ons pagina">
-							Over ons
-						</a>
+						<Link href="/over-ons">
+							<a title="Ga naar de over ons pagina">Over ons</a>
+						</Link>
 					</li>
 				</ul>
 			</nav>
