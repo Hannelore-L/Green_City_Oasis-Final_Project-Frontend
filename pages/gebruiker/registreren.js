@@ -9,11 +9,11 @@ import axios from 'axios';
 
 //        -        -        -        L O C A L   I M P O R T S        -        -        -
 import Layout from '../../components/Layout';
-// import { InputField } from '../../components/fields/InputField';
+import { InputField } from '../../components/fields/InputField';
 import { isAuthenticated } from '../../helper';
 
 //        -        -        -        E X P O R T   R E G I S T R E R E N        -        -        -
-export default ({ countries, cities }) => {
+export default function Register({ countries, cities }) {
 	const [foreign, setForeign] = useState('');
 
 	const countryList = countries.map((country) => {
@@ -60,18 +60,6 @@ export default ({ countries, cities }) => {
 
 							city: Yup.string().required('U moet uw stad opgeven'),
 						})}
-						// on submit
-						onSubmit={(values) => {
-							console.log(values);
-							// axios.post('https://https://wdev.be/wdev_hannelore/eindwerk/api/users', values)
-							// 	.then(function (response) {
-							// 		console.log(response, 'Bedankt om te registreren!');
-							// 		window.location = '/login';
-							// 	})
-							// 	.catch(function (error) {
-							// 		console.log(error, 'Onze excuses. Er is iets misgelopen.');
-							// 	});
-						}}
 						// initial values
 						initialValues={{
 							email: '',
@@ -79,18 +67,48 @@ export default ({ countries, cities }) => {
 							displayName: '',
 							firstName: '',
 							lastName: '',
-							country: '',
+							country: '15',
 							city: '',
 						}}
+						// on submit
+						// onSubmit={(values) => {
+						// 	axios({
+						// 		method: 'post',
+						// 		url: 'https://https://wdev.be/wdev_hannelore/eindwerk/api/users',
+						// 		data: values,
+						// 	})
+						// 		.then(function (response) {
+						// 			console.log(response, 'Bedankt om te registreren!');
+						// 			window.location = '/';
+						// 		})
+						// 		.catch(function (error) {
+						// 			console.log(error, 'Onze excuses. Er is iets misgelopen.');
+						// 		});
+						// }}
+						onSubmit={(values) => {
+							axios.post('https://https://wdev.be/wdev_hannelore/eindwerk/api/users', values)
+								.then(function (response) {
+									console.log(response, 'Bedankt om te registreren!');
+									window.location = '/';
+								})
+								.catch(function (error) {
+									console.log(error, 'Onze excuses. Er is iets misgelopen.');
+								});
+						}}
 					>
-						{({ handleSubmit, setFieldValue }) => (
-							<form onSubmit={handleSubmit}>
+						{({ isSubmitting, setFieldValue }) => (
+							<form>
 								<fieldset>
 									<legend>Registreer U!</legend>
 									<ul>
 										<li>
 											<label htmlFor="email">E-mailadres</label>
-											<Field name="email" type="email" placeholder="E-mailadres" />
+											<Field
+												name="email"
+												type="email"
+												placeholder="E-mailadres"
+												component={InputField}
+											></Field>
 											<div className="error_message">
 												<ErrorMessage name="email" />
 											</div>
@@ -102,7 +120,8 @@ export default ({ countries, cities }) => {
 												name="password"
 												type="password"
 												placeholder="Wachtwoord"
-											/>
+												component={InputField}
+											></Field>
 											<div className="error_message">
 												<ErrorMessage name="password" />
 											</div>
@@ -114,7 +133,8 @@ export default ({ countries, cities }) => {
 												name="displayName"
 												type="text"
 												placeholder="Gebruikersnaam"
-											/>
+												component={InputField}
+											></Field>
 											<div className="error_message">
 												<ErrorMessage
 													className="error_message"
@@ -125,7 +145,12 @@ export default ({ countries, cities }) => {
 
 										<li>
 											<label htmlFor="firstName">Voornaam</label>
-											<Field name="firstName" type="text" placeholder="Voornaam" />
+											<Field
+												name="firstName"
+												type="text"
+												placeholder="Voornaam"
+												component={InputField}
+											></Field>
 											<div className="error_message">
 												<ErrorMessage name="firstName" />
 											</div>
@@ -133,7 +158,12 @@ export default ({ countries, cities }) => {
 
 										<li>
 											<label htmlFor="lastName">Achternaam</label>
-											<Field name="lastName" type="text" placeholder="Achternaam" />
+											<Field
+												name="lastName"
+												type="text"
+												placeholder="Achternaam"
+												component={InputField}
+											></Field>
 											<div className="error_message">
 												<ErrorMessage name="lastName" />
 											</div>
@@ -192,9 +222,16 @@ export default ({ countries, cities }) => {
 												</div>
 											</li>
 										)}
+										<button
+											id="submit_button"
+											type="submit"
+											value="Verzenden"
+											disabled={isSubmitting}
+										>
+											Verzenden
+										</button>
 									</ul>
 								</fieldset>
-								<input id="submit_button" type="submit" value="Verzenden" />
 							</form>
 						)}
 					</Formik>
@@ -202,7 +239,7 @@ export default ({ countries, cities }) => {
 			</section>
 		</Layout>
 	);
-};
+}
 
 export const getStaticProps = async (ctx) => {
 	//   is user already logged in
