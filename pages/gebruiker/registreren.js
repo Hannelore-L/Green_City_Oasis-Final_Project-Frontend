@@ -62,14 +62,15 @@ export default ({ countries, cities }) => {
 						})}
 						// on submit
 						onSubmit={(values) => {
-							axios.post('https://https://wdev.be/wdev_hannelore/eindwerk/api/users', values)
-								.then(function (response) {
-									console.log(response, 'Bedankt om te registreren!');
-									window.location = '/login';
-								})
-								.catch(function (error) {
-									console.log(error, 'Onze excuses. Er is iets misgelopen.');
-								});
+							console.log(values);
+							// axios.post('https://https://wdev.be/wdev_hannelore/eindwerk/api/users', values)
+							// 	.then(function (response) {
+							// 		console.log(response, 'Bedankt om te registreren!');
+							// 		window.location = '/login';
+							// 	})
+							// 	.catch(function (error) {
+							// 		console.log(error, 'Onze excuses. Er is iets misgelopen.');
+							// 	});
 						}}
 						// initial values
 						initialValues={{
@@ -82,8 +83,8 @@ export default ({ countries, cities }) => {
 							city: '',
 						}}
 					>
-						{({ values, handleSubmit }) => (
-							<Form onSubmit={handleSubmit}>
+						{({ handleSubmit, setFieldValue }) => (
+							<form onSubmit={handleSubmit}>
 								<fieldset>
 									<legend>Registreer U!</legend>
 									<ul>
@@ -165,6 +166,9 @@ export default ({ countries, cities }) => {
 													options={countryList}
 													name="country"
 													placeholder={'Land'}
+													onChange={(value) => {
+														setFieldValue('country', value.value);
+													}}
 												/>
 												<div className="error_message">
 													<ErrorMessage name="countries"></ErrorMessage>
@@ -179,6 +183,9 @@ export default ({ countries, cities }) => {
 													options={cityList}
 													name="city"
 													placeholder={'Stad'}
+													onChange={(value) => {
+														setFieldValue('city', value.value);
+													}}
 												/>
 												<div className="error_message">
 													<ErrorMessage name="cities"></ErrorMessage>
@@ -187,10 +194,8 @@ export default ({ countries, cities }) => {
 										)}
 									</ul>
 								</fieldset>
-								<button id="submit_button" type="submit">
-									Verzenden
-								</button>
-							</Form>
+								<input id="submit_button" type="submit" value="Verzenden" />
+							</form>
 						)}
 					</Formik>
 				</article>
