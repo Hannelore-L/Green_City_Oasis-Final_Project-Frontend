@@ -90,7 +90,7 @@ export default ({ countries, cities }) => {
 										<li>
 											<label htmlFor="email">E-mailadres</label>
 											<Field name="email" type="email" placeholder="E-mailadres" />
-											<div>
+											<div className="error_message">
 												<ErrorMessage name="email" />
 											</div>
 										</li>
@@ -102,7 +102,7 @@ export default ({ countries, cities }) => {
 												type="password"
 												placeholder="Wachtwoord"
 											/>
-											<div>
+											<div className="error_message">
 												<ErrorMessage name="password" />
 											</div>
 										</li>
@@ -114,15 +114,18 @@ export default ({ countries, cities }) => {
 												type="text"
 												placeholder="Gebruikersnaam"
 											/>
-											<div>
-												<ErrorMessage name="displayName" />
+											<div className="error_message">
+												<ErrorMessage
+													className="error_message"
+													name="displayName"
+												/>
 											</div>
 										</li>
 
 										<li>
 											<label htmlFor="firstName">Voornaam</label>
 											<Field name="firstName" type="text" placeholder="Voornaam" />
-											<div>
+											<div className="error_message">
 												<ErrorMessage name="firstName" />
 											</div>
 										</li>
@@ -130,7 +133,7 @@ export default ({ countries, cities }) => {
 										<li>
 											<label htmlFor="lastName">Achternaam</label>
 											<Field name="lastName" type="text" placeholder="Achternaam" />
-											<div>
+											<div className="error_message">
 												<ErrorMessage name="lastName" />
 											</div>
 										</li>
@@ -156,33 +159,37 @@ export default ({ countries, cities }) => {
 										</li>
 
 										{foreign == 'yes' && countryList && (
-											<li>
+											<li className="select_box">
+												<label htmlFor="country">In welk land woont U dan?</label>
 												<Select
 													options={countryList}
 													name="country"
 													placeholder={'Land'}
 												/>
-												<div>
+												<div className="error_message">
 													<ErrorMessage name="countries"></ErrorMessage>
 												</div>
 											</li>
 										)}
 
 										{foreign == 'no' && cityList && (
-											<li>
+											<li className="select_box">
+												<label htmlFor="country">In welke stad woont U dan?</label>
 												<Select
 													options={cityList}
 													name="city"
 													placeholder={'Stad'}
 												/>
-												<div>
+												<div className="error_message">
 													<ErrorMessage name="cities"></ErrorMessage>
 												</div>
 											</li>
 										)}
 									</ul>
 								</fieldset>
-								<button type="submit">Verzenden</button>
+								<button id="submit_button" type="submit">
+									Verzenden
+								</button>
 							</Form>
 						)}
 					</Formik>

@@ -30,19 +30,34 @@ export default ({ locations }) => {
 				<h3>Spotlight!</h3>
 				<p>De meest recent toegevoegde locaties!</p>
 				<div className="grid_container">
-					{locations.map(({ id, name, addressText }) => (
+					{locations.map((location) => (
 						<article>
 							<Link
-								href={`/locatie/[id]/[name]?id=${id},name=${slugify(name)}`}
-								as={`/locatie/${id}/${slugify(name)}`}
+								href={`/locatie/[id]/[name]?id=${location.id},name=${slugify(location.name)}`}
+								as={`/locatie/${location.id}/${slugify(location.name)}`}
 							>
-								<a key={id}>
-									<p>{name}</p>
+								<a key={location.id}>
+									<p>{location.name}</p>
 									<p className="index_imgs">
-										<img
+										{location['images'] && location['images'][0] ? (
+											<img
+												src={`http://wdev.be/wdev_hannelore/eindwerk/system/image.php/green-city-oasis-${slugify(
+													location.name
+												)}-${
+													location['images'][0].id
+												}.jpg?width=400&height=400&cropratio=1:1&image=/wdev_hannelore/eindwerk/system/images/${
+													location['images'][0].fileName
+												}`}
+												alt={`Foto van ${location.name}`}
+											/>
+										) : (
+											<img src={`/images/logo_placeholder.jpg`} alt={`placeholder`} />
+										)}
+
+										{/* <img
 											src={`https://wdev.be/wdev_hannelore/eindwerk/system/images/pleintje-paep-thoon-1-5f48e1b48e9b1086281535.jpg`}
 											alt={`Foto van ${name}`}
-										/>
+										/> */}
 										{/* <img
 											src={`https://wdev.be/wdev_hannelore/eindwerk/system/images/${locations['images'][0].fileName}`}
 											alt={`Foto van ${props.name}`}

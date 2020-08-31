@@ -18,20 +18,18 @@ function Detail(props) {
 					<section className="location_image">
 						{props['images'] && props['images'][0] ? (
 							<img
-								// src={`https://wdev.be/wdev_hannelore/eindwerk/system/images/${props['images'][0].fileName}`}
-								src={`http://wdev.be/wdev_hannelore/eindwerk/system/image.php/123.jpg?width=350&height=350&cropratio=1:1&image=/wdev_hannelore/eindwerk/system/images/${props['images'][0].fileName}`}
+								src={`http://wdev.be/wdev_hannelore/eindwerk/system/image.php/green-city-oasis-${slugify(
+									props.name
+								)}-${
+									props['images'][0].id
+								}.jpg?width=350&height=350&cropratio=1:1&image=/wdev_hannelore/eindwerk/system/images/${
+									props['images'][0].fileName
+								}`}
 								alt={`Foto van ${props.name}`}
 							/>
 						) : (
-							<img
-								src={`https://wdev.be/wdev_hannelore/eindwerk/system/images/pleintje-paep-thoon-1-5f48e1b48e9b1086281535.jpg`}
-								alt={`placeholder`}
-							/>
+							<img src={`/images/logo_placeholder.jpg`} alt={`placeholder`} />
 						)}
-						{/* <img
-							src={`https://wdev.be/wdev_hannelore/eindwerk/system/images/pleintje-paep-thoon-1-5f48e1b48e9b1086281535.jpg`}
-							alt={`Foto van ${props.name}`}
-						/> */}
 					</section>
 
 					<section className="location_info">
@@ -42,14 +40,6 @@ function Detail(props) {
 						<p>{props.addressText}</p>
 
 						<p className="info">Tags:</p>
-						{/* <p className="tag">Tag </p>
-						<p className="tag">Tag </p>
-						<p className="tag">Tag </p>
-						<p className="tag">Tag </p>
-						<p className="tag">Tag </p>
-						<p className="tag">Tag </p>
-						<p className="tag">Tag </p>
-						<p className="tag">Tag </p> */}
 						{props['tags'] &&
 							props['tags'].map(({ id, name }) => (
 								<p className="tag" key={id}>
