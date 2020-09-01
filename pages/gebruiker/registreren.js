@@ -22,7 +22,7 @@ export default function Register({ countries, cities }) {
 
 	// const cityList = countries['cities'].map((city) => {
 	const cityList = cities.map((city) => {
-		return { value: `api/cities/${city.id}`, label: `${city.name} ` };
+		return { value: `api/cities/${city.id}`, label: `${city.zip} ${city.name} ` };
 	});
 
 	return (
@@ -183,6 +183,8 @@ export default function Register({ countries, cities }) {
 														options={countryList}
 														name="country"
 														placeholder={'Land'}
+														maxMenuHeight={460}
+														menuPlacement="top"
 														onChange={(value) => {
 															setFieldValue('country', value.value);
 														}}
@@ -201,7 +203,9 @@ export default function Register({ countries, cities }) {
 													<Select
 														options={cityList}
 														name="city"
-														placeholder={'Stad'}
+														placeholder={'Typ Uw postcode, aub.'}
+														maxMenuHeight={460}
+														menuPlacement="top"
 														onChange={(value) => {
 															setFieldValue('city', value.value);
 														}}
@@ -233,7 +237,9 @@ export const getStaticProps = async (ctx) => {
 
 	const countryResult = await axios.get('https://wdev.be/wdev_hannelore/eindwerk/api/countries');
 	const countries = countryResult.data['hydra:member'];
-	const cityResult = await axios.get('https://wdev.be/wdev_hannelore/eindwerk/api/cities');
+	const cityResult = await axios.get(
+		'https://wdev.be/wdev_hannelore/eindwerk/api/cities?order%5Bname%5D=asc&page=1'
+	);
 	const cities = cityResult.data['hydra:member'];
 	return {
 		props: {
