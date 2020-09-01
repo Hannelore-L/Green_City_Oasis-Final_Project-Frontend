@@ -358,6 +358,11 @@ header {
 				} //   form
 			} //   article
 		} //   section.register
+		section.login {
+			display: flex;
+			justify-content: center;
+			padding-top: 200px;
+		}
 	} //   main
 } //   .maindiv
 
