@@ -13,7 +13,8 @@ Modal.setAppElement('#__next');
 
 //        -        -        -        E X P O R T   I N D E X        -        -        -
 
-export default ({ locations }) => {
+export default function Index({ locations }) {
+	// console.log(locations);
 	return (
 		<Layout title="Green City Oasis || Startpagina" description="U bent op de startpagina">
 			<section id="home_message">
@@ -26,11 +27,11 @@ export default ({ locations }) => {
 					</p>
 				</article>
 			</section>
-			<section id="home_spotlight">
+			<section className="location_cards">
 				<h3>Spotlight!</h3>
 				<p>De meest recent toegevoegde locaties!</p>
 				<div className="grid_container">
-					{locations.map((location) => (
+					{locations.slice(0, 6).map((location) => (
 						<article>
 							<Link
 								href={`/locatie/[id]/[name]?id=${location.id},name=${slugify(location.name)}`}
@@ -38,7 +39,7 @@ export default ({ locations }) => {
 							>
 								<a key={location.id}>
 									<p>{location.name}</p>
-									<p className="index_imgs">
+									<p className="card_imgs">
 										{location['images'] && location['images'][0] ? (
 											<img
 												src={`http://wdev.be/wdev_hannelore/eindwerk/system/image.php/green-city-oasis-${slugify(
@@ -53,15 +54,6 @@ export default ({ locations }) => {
 										) : (
 											<img src={`/images/logo_placeholder.jpg`} alt={`placeholder`} />
 										)}
-
-										{/* <img
-											src={`https://wdev.be/wdev_hannelore/eindwerk/system/images/pleintje-paep-thoon-1-5f48e1b48e9b1086281535.jpg`}
-											alt={`Foto van ${name}`}
-										/> */}
-										{/* <img
-											src={`https://wdev.be/wdev_hannelore/eindwerk/system/images/${locations['images'][0].fileName}`}
-											alt={`Foto van ${props.name}`}
-										/> */}
 									</p>
 								</a>
 							</Link>
@@ -78,12 +70,12 @@ export default ({ locations }) => {
 			</Modal>
 		</Layout>
 	); //     end of return
-}; //     end of export
+} //     end of export
 
 //        -        -        -        S E R V E R   S I D E   P R O P S        -        -        -
 export const getServerSideProps = async () => {
 	const result = await axios.get(
-		'https://wdev.be/wdev_hannelore/eindwerk/api/locations?isDeleted=false&order%5BcreatedAt%5D=desc&page=1'
+		'https://wdev.be/wdev_hannelore/eindwerk/api/locations?isDeleted=false&order%5BcreatedAt%5D=desc'
 	);
 	return {
 		props: {
@@ -91,71 +83,3 @@ export const getServerSideProps = async () => {
 		},
 	}; //     end of return
 }; // end of GetStaticProps
-
-// what was originally on this page
-
-// import Head from 'next/head'
-// import styles from '../styles/Home.module.css'
-
-// export default function Home() {
-// 	return (
-// 		<div className={styles.container}>
-// 			<Head>
-// 				<title>Create Next App</title>
-// 				<link rel="icon" href="/favicon.ico" />
-// 			</Head>
-
-// 			<main className={styles.main}>
-// 				<h1 className={styles.title}>
-// 					Welcome to <a href="https://nextjs.org">Next.js!</a>
-// 				</h1>
-
-// 				<p className={styles.description}>
-// 					Get started by editing{' '}
-// 					<code className={styles.code}>pages/index.js</code>
-// 				</p>
-
-// 				<div className={styles.grid}>
-// 					<a href="https://nextjs.org/docs" className={styles.card}>
-// 						<h3>Documentation &rarr;</h3>
-// 						<p>Find in-depth information about Next.js features and API.</p>
-// 					</a>
-
-// 					<a href="https://nextjs.org/learn" className={styles.card}>
-// 						<h3>Learn &rarr;</h3>
-// 						<p>Learn about Next.js in an interactive course with quizzes!</p>
-// 					</a>
-
-// 					<a
-// 						href="https://github.com/vercel/next.js/tree/master/examples"
-// 						className={styles.card}
-// 					>
-// 						<h3>Examples &rarr;</h3>
-// 						<p>Discover and deploy boilerplate example Next.js projects.</p>
-// 					</a>
-
-// 					<a
-// 						href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-// 						className={styles.card}
-// 					>
-// 						<h3>Deploy &rarr;</h3>
-// 						<p>
-// 							Instantly deploy your Next.js site to a public URL with Vercel.
-// 						</p>
-// 					</a>
-// 				</div>
-// 			</main>
-
-// 			<footer className={styles.footer}>
-// 				<a
-// 					href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-// 					target="_blank"
-// 					rel="noopener noreferrer"
-// 				>
-// 					Powered by{' '}
-// 					<img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-// 				</a>
-// 			</footer>
-// 		</div>
-// 	)
-// }

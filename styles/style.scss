@@ -123,33 +123,6 @@ header {
 				}
 			}
 		}
-		// 	display: flex;
-		// 	justify-content: center;
-		// 	align-self: center;
-		// 	&:hover div {
-		// 		display: block;
-		// 	}
-		// 	div.fa-bars {
-		// 		color: $grey-light;
-		// 		font-size: 2rem;
-		// 		transition: all 500ms ease;
-		// 		cursor: pointer;
-		// 		&:hover {
-		// 			color: $green-light-sheer;
-		// 		}
-		// 	}
-		// 	ul {
-		// 		display: none;
-		// 		position: absolute;
-		// 		z-index: 15;
-		// 		a {
-		// 			display: block;
-		// 			padding: 1rem;
-		// 			&:hover {
-		// 			}
-		// 		}
-		// 	}
-		// }
 	} //   nav
 } //   header
 
@@ -195,7 +168,7 @@ header {
 
 		//   -    home_spotlight   -
 
-		section#home_spotlight {
+		section.location_cards {
 			min-height: 500px;
 			background-color: $grey-light;
 			box-shadow: -5px 5px 10px $shadow-light;
@@ -223,7 +196,7 @@ header {
 						color: $green-dark;
 						p {
 							margin-bottom: 1.5rem;
-							&.index_imgs {
+							&.card_imgs {
 								position: relative;
 								overflow: hidden;
 								width: 100%;
@@ -333,7 +306,7 @@ header {
 			} //   section.right_side
 		} //   article.detail
 
-		/*      *               *              R E G I S T E R               *               *      */
+		/*      *               *              R E G I S T E R   &   L O G I N               *               *      */
 		section.form {
 			display: grid;
 			grid-template-columns: 40% 60%; // 1/2 = 50%    2/3 = 50%
@@ -440,6 +413,12 @@ header {
 		p.error_message {
 			color: $error;
 			padding: 1rem 0;
+		}
+
+		/*      *               *              T A G   P A G E               *               *      */
+		p.label_thingy,
+		p.search_thingy {
+			margin: $container-margin;
 		}
 	} //   main
 } //   .maindiv
