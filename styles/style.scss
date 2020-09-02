@@ -49,38 +49,107 @@ header {
 	/*      _________________________________________________________________      */
 
 	nav {
-		grid-column: 2 / 3; // header is grid container, starting with section 2 end ending before section 3
-		height: $header-height;
-		align-items: center;
-		ul {
-			height: 100px;
-			margin-left: auto;
-			margin-right: 0px;
-			display: grid; //   grid container for li
-			grid-template-columns: 50% 1fr 1fr 1fr; // 1/2 = 50%    2/3 = 1fr    3/4 = 1fr    4/5 = 1fr
-			li {
-				display: grid;
-				justify-content: space-around;
-				align-content: center;
-				text-transform: uppercase;
-				font-weight: 700;
-				font-size: 1.1rem;
-				a {
-					color: $grey-light;
-					padding: 1.5rem 2rem;
+		&.main_nav {
+			grid-column: 2 / 3; // header is grid container, starting with section 2 end ending before section 3
+			height: $header-height;
+			align-items: center;
+			ul {
+				height: 100px;
+				margin-left: auto;
+				margin-right: 0px;
+				display: grid; //   grid container for li
+				grid-template-columns: 50% 1fr 1fr 1fr; // 1/2 = 50%    2/3 = 1fr    3/4 = 1fr    4/5 = 1fr
+				li {
+					display: grid;
+					justify-content: space-around;
+					align-content: center;
+					text-transform: uppercase;
+					font-weight: 700;
+					font-size: 1.1rem;
 					transition: all 500ms ease;
-					&:hover {
-						border: 3px solid white;
-					} //   :hover
-					&#gco {
-						@include font(400, 2.7rem, $header-font, normal, 2, left, 0.1em);
+					a {
+						color: $grey-light;
+						padding: 1.5rem 2rem;
+						transition: all 500ms ease;
 						&:hover {
-							border: none;
+							border: 3px solid $grey-light;
 						} //   :hover
-					} //   #gco
-				} //   a
-			} //   li
-		} //   ul
+						&#gco {
+							@include font(400, 2.7rem, $header-font, normal, 2, left, 0.1em);
+							&:hover {
+								border: none;
+							} //   :hover
+						} //   #gco
+					} //   a
+				} //   li
+			} //   ul
+		} //   .main_nav
+		&.user_nav {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			.dropdown {
+				position: relative;
+				&:hover {
+					ul {
+						display: block;
+					}
+				}
+				.fas {
+					color: white;
+					font-size: 2rem;
+					border: none;
+					cursor: pointer;
+				}
+				ul {
+					display: none;
+					position: absolute;
+					right: -8rem;
+					width: 16rem;
+					text-align: center;
+					background-color: #f9f9f9;
+					box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+					z-index: 1;
+					a {
+						color: black;
+						padding: 12px 16px;
+						text-decoration: none;
+						display: block;
+						&:hover {
+							background-color: $green-light;
+							color: $grey-light;
+						}
+					}
+				}
+			}
+		}
+		// 	display: flex;
+		// 	justify-content: center;
+		// 	align-self: center;
+		// 	&:hover div {
+		// 		display: block;
+		// 	}
+		// 	div.fa-bars {
+		// 		color: $grey-light;
+		// 		font-size: 2rem;
+		// 		transition: all 500ms ease;
+		// 		cursor: pointer;
+		// 		&:hover {
+		// 			color: $green-light-sheer;
+		// 		}
+		// 	}
+		// 	ul {
+		// 		display: none;
+		// 		position: absolute;
+		// 		z-index: 15;
+		// 		a {
+		// 			display: block;
+		// 			padding: 1rem;
+		// 			&:hover {
+		// 			}
+		// 		}
+		// 	}
+		// }
 	} //   nav
 } //   header
 
@@ -265,7 +334,7 @@ header {
 		} //   article.detail
 
 		/*      *               *              R E G I S T E R               *               *      */
-		section.register {
+		section.form {
 			display: grid;
 			grid-template-columns: 40% 60%; // 1/2 = 50%    2/3 = 50%
 			height: $main-height;
@@ -278,10 +347,13 @@ header {
 				display: flex;
 				justify-content: center;
 				align-items: center;
+				flex-direction: column;
 				form {
 					background-color: $grey-light;
 					padding: 5rem;
 					width: 80%;
+					max-height: 650px;
+					overflow-y: scroll;
 					legend {
 						@include font(700, 3rem, $primary-font, normal, 2, left 0.2em);
 						padding-bottom: 2rem;
@@ -304,7 +376,8 @@ header {
 							border-bottom: 2px $green-light-sheer dotted;
 						} //   input
 						div {
-							&.error_message {
+							&.error_message,
+							p.error_message {
 								grid-column: 1/3;
 								grid-row: 2/3;
 								padding: 1rem 0;
@@ -336,7 +409,8 @@ header {
 						@include font(400, 1.6rem, $primary-font, normal, 2, center, 0.1em);
 						color: white;
 						text-shadow: 1px 1px 3px $shadow-dark;
-						&:hover {
+						&:hover,
+						&:focus {
 							background: $green-light;
 							transition: all 500ms ease;
 						} //   :hover
@@ -362,6 +436,10 @@ header {
 			display: flex;
 			justify-content: center;
 			padding-top: 200px;
+		}
+		p.error_message {
+			color: $error;
+			padding: 1rem 0;
 		}
 	} //   main
 } //   .maindiv

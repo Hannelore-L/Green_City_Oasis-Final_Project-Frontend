@@ -4,8 +4,8 @@ import Select from 'react-select';
 import { Form, Formik, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-// import Link from 'next/link';
-// import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 //        -        -        -        L O C A L   I M P O R T S        -        -        -
 import Layout from '../../components/Layout';
@@ -15,12 +15,12 @@ import { isAuthenticated } from '../../helper';
 //        -        -        -        E X P O R T   R E G I S T R E R E N        -        -        -
 export default function Register({ countries, cities }) {
 	const [foreign, setForeign] = useState('');
+	const [error, setError] = useState('');
 
 	const countryList = countries.map((country) => {
 		return { value: `api/countries/${country.id}`, label: `${country.name} ` };
 	});
 
-	// const cityList = countries['cities'].map((city) => {
 	const cityList = cities.map((city) => {
 		return { value: `api/cities/${city.id}`, label: `${city.zip} ${city.name} ` };
 	});
@@ -28,7 +28,7 @@ export default function Register({ countries, cities }) {
 	return (
 		<>
 			<Layout title="Green City Oasis || Registreren" description="U bent op de registratie pagina">
-				<section className="register">
+				<section className="form">
 					<aside></aside>
 					<article>
 						<Formik
@@ -72,14 +72,106 @@ export default function Register({ countries, cities }) {
 								city: 'api/cities/2766',
 							}}
 							onSubmit={(values) => {
-								console.log(`------------${values}`);
+								setError('');
 								axios.post('https://wdev.be/wdev_hannelore/eindwerk/api/users', values)
 									.then(function (response) {
 										console.log(response, 'Bedankt om te registreren!');
 										window.location = '/gebruiker/inloggen';
 									})
-									.catch(function (error) {
-										console.log(error, 'Onze excuses. Er is iets misgelopen.');
+									.catch((e) => {
+										// setError(e.response.data['hydra:description']);
+
+										let error = e.response.data['hydra:description'];
+
+										switch (error) {
+											case 'email: Deze waarde wordt al gebruikt.':
+												console.log(`error: ${error}`);
+												setError(
+													<p>
+														Dit e-mailadres is al in gebruik. Kijk Uw
+														e-mailadres na of{' '}
+														<Link href="/gebruiker/inloggen">
+															<a>log in</a>
+														</Link>
+														.
+													</p>
+												);
+												break;
+
+											case 'displayName: Deze waarde wordt al gebruikt.':
+												console.log(`error: ${error}`);
+												setError(<p>Deze gebruikersnaam is niet beschikbaar.</p>);
+												break;
+
+											// case error.length > 50:
+											// 	console.log(`error: ${error}`);
+											// // error = (
+											// // 	<p>
+											// // 		Dit e-mailadres is al in gebruik. Kijk Uw
+											// // 		e-mailadres na of{' '}
+											// // 		<Link href="/gebruiker/inloggen">
+											// // 			<a>log in</a>
+											// // 		</Link>
+											// // 		.<br />
+											// // 		Deze gebruikersnaam is niet beschikbaar.
+											// // 	</p>
+											// // );
+
+											default:
+												console.log(`error: ${error}`);
+												setError('');
+										}
+
+										// if (error) {
+										// 	//   if email is entered wrong
+										// 	if (error == 'email: Deze waarde wordt al gebruikt.') {
+										// 		error = <p>
+										// 				Dit e-mailadres is al in gebruik. Kijk Uw
+										// 				e-mailadres na of{' '}
+										// 				<Link href="/gebruiker/inloggen">
+										// 					<a>log in</a>
+										// 				</Link>
+										// 				.
+										// 			</p>
+										// 		);
+										// 		setError(error);
+										// 	} else {
+										// 		if (
+										// 			error == 'displayName: Deze waarde wordt al gebruikt.'
+										// 		) {
+										// 			error = (
+										// 				<p>Deze gebruikersnaam is niet beschikbaar.</p>
+										// 			);
+										// 			setError(error);
+										// 		} else {
+										// 			if (
+										// 				error ==
+										// 				'email: Deze waarde wordt al gebruikt.displayName: Deze waarde wordt al gebruikt.'
+										// 			) {
+										// 				error = (
+										// 					<p>
+										// 						Dit e-mailadres is al in gebruik. Kijk
+										// 						Uw e-mailadres na of{' '}
+										// 						<Link href="/gebruiker/inloggen">
+										// 							<a>log in</a>
+										// 						</Link>
+										// 						.<br />
+										// 						Deze gebruikersnaam is niet beschikbaar.
+										// 					</p>
+										// 				);
+										// 				setError(error);
+										// 			}
+										// 		}
+										// 	}
+										// } else {
+										// 	setError(error);
+										// }
+										// console.log(error);
+										// 	console.log(
+										// 		JSON.stringify(e.response.data['hydra:description']),
+										// 		'Onze excuses. Er is iets misgelopen.'
+										// 	);
+										// 	setError(e.response.data['hydra:description']);
 									});
 							}}
 						>
@@ -87,6 +179,7 @@ export default function Register({ countries, cities }) {
 								<Form>
 									<fieldset>
 										<legend>Registreer U!</legend>
+										{error && <p>{error}</p>}
 										<ul>
 											<li>
 												<label htmlFor="email">E-mailadres</label>
@@ -96,7 +189,7 @@ export default function Register({ countries, cities }) {
 													placeholder="E-mailadres"
 													component={InputField}
 												></Field>
-												<div className="error_message">
+												<div className="error_message" id="email_error">
 													<ErrorMessage name="email" />
 												</div>
 											</li>
@@ -237,10 +330,12 @@ export const getStaticProps = async (ctx) => {
 
 	const countryResult = await axios.get('https://wdev.be/wdev_hannelore/eindwerk/api/countries');
 	const countries = countryResult.data['hydra:member'];
+
 	const cityResult = await axios.get(
 		'https://wdev.be/wdev_hannelore/eindwerk/api/cities?order%5Bname%5D=asc&page=1'
 	);
 	const cities = cityResult.data['hydra:member'];
+
 	return {
 		props: {
 			countries,

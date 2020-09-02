@@ -17,7 +17,7 @@ export default function Menu() {
 
 	return (
 		<>
-			<nav className="nav">
+			<nav className="main_nav">
 				<ul>
 					<li>
 						<Link href="/">
@@ -47,13 +47,17 @@ export default function Menu() {
 						</Link>
 					</li>
 				</ul>
+			</nav>
 
-				<ul className="nav-profile">
-					{(loggedin && (
-						<>
+			<nav className="user_nav">
+				{(loggedin && (
+					<div class="dropdown">
+						<div class="fas fa-user"></div>
+
+						<ul>
 							<li>
-								<Link href="/profile">
-									<a title="profiel">Profiel</a>
+								<Link href="gebruiker/profiel">
+									<a title="Ga naar je profiel pagina">Profiel</a>
 								</Link>
 							</li>
 							<li>
@@ -61,15 +65,27 @@ export default function Menu() {
 									<a onClick={logout}>Afmelden</a>
 								</Link>{' '}
 							</li>
-						</>
-					)) || (
-						<li className="nav-loggedin">
-							<Link href="/gebruiker/inloggen">
-								<a title="login">Inloggen</a>
-							</Link>
-						</li>
-					)}
-				</ul>
+						</ul>
+					</div>
+				)) || (
+					<div class="dropdown">
+						<div class="fas fa-bars"></div>
+
+						<ul>
+							<li>
+								<Link href="/gebruiker/inloggen">
+									<a title="Ga naar de login pagina">Inloggen</a>
+								</Link>
+							</li>
+
+							<li>
+								<Link href="/gebruiker/registreren">
+									<a title="Ga naar de registratie pagina">Registreren</a>
+								</Link>
+							</li>
+						</ul>
+					</div>
+				)}
 			</nav>
 		</>
 	);
