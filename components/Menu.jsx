@@ -51,8 +51,8 @@ export default function Menu() {
 
 			<nav className="user_nav">
 				{(loggedin && (
-					<div class="dropdown">
-						<div class="fas fa-user"></div>
+					<div className="dropdown">
+						<div className="fas fa-user"></div>
 
 						<ul>
 							<li>
@@ -68,8 +68,8 @@ export default function Menu() {
 						</ul>
 					</div>
 				)) || (
-					<div class="dropdown">
-						<div class="fas fa-bars"></div>
+					<div className="dropdown">
+						<div className="fas fa-bars"></div>
 
 						<ul>
 							<li>

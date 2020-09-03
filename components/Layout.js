@@ -1,6 +1,5 @@
 //        -        -        -        R E A C T ' S   I M P O R T S        -        -        -
 import React from 'react';
-import Link from 'next/link';
 import Head from 'next/head';
 
 //        -        -        -        L O C A L   I M P O R T S        -        -        -

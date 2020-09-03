@@ -2,6 +2,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 //        -        -        -        L O C A L   I M P O R T S        -        -        -
 import Layout from '../../../components/Layout';
@@ -41,9 +42,16 @@ export default function Detail(props) {
 						<p className="info">Tags:</p>
 						{props['tags'] &&
 							props['tags'].map(({ id, name }) => (
-								<p className="tag" key={id}>
-									{name}
-								</p>
+								<Link
+									href={`/labels/[id]/[name]?id=${id},name=${name}`}
+									as={`/labels/${id}/${name}`}
+								>
+									<a>
+										<p className="tag" key={id}>
+											{name}
+										</p>
+									</a>
+								</Link>
 							))}
 					</section>
 				</section>
@@ -52,6 +60,31 @@ export default function Detail(props) {
 					<section className="location_description">
 						<h1>{props.name}</h1>
 						<div className="text" dangerouslySetInnerHTML={{ __html: props.description }} />
+					</section>
+
+					<section className="location_review">
+						<p>Reviews</p>
+						<p>.</p>
+						<p>.</p>
+						<p>.</p>
+						<p>.</p>
+						<p>.</p>
+						<p>.</p>
+						<p>.</p>
+						<p>.</p>
+						<p>.</p>
+						<p>.</p>
+						<p>.</p>
+						<p>.</p>
+						<p>.</p>
+						<p>.</p>
+						<p>.</p>
+						<p>.</p>
+						<p>.</p>
+						<p>.</p>
+						<p>.</p>
+						<p>.</p>
+						<p>.</p>
 					</section>
 				</section>
 			</article>

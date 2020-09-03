@@ -10,18 +10,15 @@ import { slugify } from '../../../helper';
 
 //        -        -        -        E X P O R T   T A G   L I S T        -        -        -
 
-export default function TagList(props) {
-	console.log(props['hydra:member']);
+export default function TagList({ tags }) {
+	console.log(tags);
 	return (
-		<Layout
-			title={`Green City Oasis || ${props['hydra:member'][0].name}`}
-			description={`Dit is de detail pagina van ${props['hydra:member'][0].name}`}
-		>
+		<Layout title={`Green City Oasis || ${tags.name}`} description={`Dit is de detail pagina van ${tags.name}`}>
 			<section className="location_cards">
-				<h3>Locaties met het label "{props['hydra:member'][0].name}"</h3>
+				<h3>Locaties met het label "{tags[0].name}"</h3>
 				<div className="grid_container">
-					{props['hydra:member'][0]['locations'] &&
-						props['hydra:member'][0]['locations'].map((location) => (
+					{tags[0]['locations'] &&
+						tags[0]['locations'].map((location) => (
 							<article>
 								<Link
 									href={`/locatie/[id]/[name]?id=${location.id},name=${slugify(
@@ -76,9 +73,11 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-	const res = await axios.get(`https://wdev.be/wdev_hannelore/eindwerk/api/tags?name=${params.name}`);
+	const tagResults = await axios.get(`https://wdev.be/wdev_hannelore/eindwerk/api/tags?name=${params.name}`);
 
 	return {
-		props: res.data,
+		props: {
+			tags: tagResults.data['hydra:member'],
+		},
 	};
 }

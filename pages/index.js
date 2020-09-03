@@ -31,37 +31,43 @@ export default function Index({ locations }) {
 				<h3>Spotlight!</h3>
 				<p>De meest recent toegevoegde locaties!</p>
 				<div className="grid_container">
-					{locations.slice(0, 6).map((location) => (
-						<article>
-							<Link
-								href={`/locatie/[id]/[name]?id=${location.id},name=${slugify(location.name)}`}
-								as={`/locatie/${location.id}/${slugify(location.name)}`}
-							>
-								<a key={location.id}>
-									<p>{location.name}</p>
-									<p className="card_imgs">
-										{location['images'] && location['images'][0] ? (
-											<img
-												src={`http://wdev.be/wdev_hannelore/eindwerk/system/image.php/green-city-oasis-${slugify(
-													location.name
-												)}-${
-													location['images'][0].id
-												}.jpg?width=400&height=400&cropratio=1:1&image=/wdev_hannelore/eindwerk/system/images/${
-													location['images'][0].fileName
-												}`}
-												alt={`Foto van ${location.name}`}
-											/>
-										) : (
-											<img src={`/images/logo_placeholder.jpg`} alt={`placeholder`} />
-										)}
-									</p>
-								</a>
-							</Link>
-							<Link href={`/`} as={`/`}>
-								<a className="modal">Toon op de kaart</a>
-							</Link>
-						</article>
-					))}
+					{locations &&
+						locations.slice(0, 6).map((location) => (
+							<article>
+								<Link
+									href={`/locatie/[id]/[name]?id=${location.id},name=${slugify(
+										location.name
+									)}`}
+									as={`/locatie/${location.id}/${slugify(location.name)}`}
+								>
+									<a key={location.id}>
+										<p>{location.name}</p>
+										<p className="card_imgs">
+											{location['images'] && location['images'][0] ? (
+												<img
+													src={`http://wdev.be/wdev_hannelore/eindwerk/system/image.php/green-city-oasis-${slugify(
+														location.name
+													)}-${
+														location['images'][0].id
+													}.jpg?width=400&height=400&cropratio=1:1&image=/wdev_hannelore/eindwerk/system/images/${
+														location['images'][0].fileName
+													}`}
+													alt={`Foto van ${location.name}`}
+												/>
+											) : (
+												<img
+													src={`/images/logo_placeholder.jpg`}
+													alt={`placeholder`}
+												/>
+											)}
+										</p>
+									</a>
+								</Link>
+								<Link href={`/`} as={`/`}>
+									<a className="modal">Toon op de kaart</a>
+								</Link>
+							</article>
+						))}
 				</div>
 			</section>
 
