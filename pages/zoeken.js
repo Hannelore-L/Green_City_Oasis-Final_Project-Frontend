@@ -11,7 +11,6 @@ import Layout from '../components/Layout';
 export default function Search({ taglist }) {
 	const [locations, setLocations] = useState([]);
 	const [filteredLocations, setFilteredLocations] = useState([]);
-	const [locationtags, setLocationTags] = useState([]);
 	const [selectedFilters, setSelectedFilters] = useState([]);
 	const [search, setSearch] = useState('');
 
@@ -21,12 +20,7 @@ export default function Search({ taglist }) {
 			setLocations(response.data['hydra:member']);
 			setFilteredLocations(response.data['hydra:member']);
 		});
-
-		// //   get an array of tags
-		// axios.get('https://wdev.be/wdev_hannelore/eindwerk/api/tags').then((response) => {
-		// 	setTags(response.data['hydra:member']);
-		// });
-	}, []);
+	}, []); //   end of useEffect
 
 	//   when filtered by the tags
 	const tagFilter = (tagFilterId) => {
@@ -40,51 +34,45 @@ export default function Search({ taglist }) {
 		} else {
 			selectedFiltersArray.splice(indexOfTag, 1);
 			setSelectedFilters(selectedFiltersArray);
-		}
+		} //   end of if else
 
 		const filteredLocationsArray = new Array();
 		locations.map((location) => {
-			// locationTagIds[`${location.id}`] = location['tags'].map((tag) => tag.id);
 			const tagsArray = location['tags'].map((tag) => tag.id);
 			const inArrayCheck = (id) => tagsArray.includes(id);
 			if (selectedFilters.every(inArrayCheck)) {
 				filteredLocationsArray.push(location);
-			}
-		});
+			} //   end of if
+		}); //   end of locations.map
 		setFilteredLocations(filteredLocationsArray);
-
-		// console.log(selectedFilters);
-
-		// const locationTagIds = locations;
-
-		// locations.map((location) => {
-		// 	location['tags'].map((tag) => {
-		// 		locationTagIds[{ location }] = tag.id;
-		// 	});
-		// });
-		// console.log(locations);
-	};
+	}; //   end of tagFilter
 
 	//   when filtered by the search bar
-	// const searchFilter = () => {
-	// 	const filteredLocationsBySearch = locations.filter((location) => {
-	// 		if (search == '') {
-	// 			return false;
-	// 		} else {
-	// 			return true;
-	// 		}
-	// 	});
-	// 	setFilteredLocations(filteredLocationsBySearch);
-	// };
-
-	// console.log(locations);
-	// console.log(filteredLocations);
-	// console.log(tags);
-	// console.log(search);
+	const searchFilter = () => {
+		if (search != '') {
+			const filteredLocationsBySearch = filteredLocations.filter((location) => {
+				// if the search string is not found in the name AND isn't found in the description, the location should not show, so return false
+				if (location.name.search(search) == -1 && location.description.search(search) == -1) {
+					return false;
+				} else {
+					return true;
+				} //   end of if else
+			}); //   end of filter
+			setFilteredLocations(filteredLocationsBySearch);
+		} // end ofif (search != '')
+	}; //   end of searchFilter
 
 	return (
 		<Layout title="Green City Oasis || Locaties zoeken" description="U bent op de zoek pagina">
-			<p className="search_thingy">Search</p>
+			<section className="search_desc">
+				<h2>Search</h2>
+				<p>
+					Zoek je de ideale groene oase om wat tijd in door te brengen? Dan ben je hier op het juiste
+					adres! Klik op de filters aan de linker zijde om de selectie te verkleinen! Zie je geen enkel
+					resultaat meer? Probeer dan een filter weg te halen. Ben je naar iets specifiek op zoek? De
+					zoek balk is je beste vriend!
+				</p>
+			</section>
 
 			<section className="search_bar">
 				<input
@@ -233,7 +221,7 @@ export default function Search({ taglist }) {
 				</ul>
 			</section>
 
-			<section>
+			<section className="filtered_locations">
 				<ul>
 					{filteredLocations &&
 						filteredLocations.length > 0 &&
