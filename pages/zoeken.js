@@ -101,16 +101,14 @@ export default function Search({ taglist }) {
 							.filter(({ category }) => category == 'Natuur')
 							.map(({ id, name }) => (
 								<li key={id}>
-									<Link href="#" as="">
-										<a
-											onClick={(e) => {
-												e.preventDefault();
-												tagFilter({ id });
-											}}
-										>
-											{name}
-										</a>
-									</Link>
+									<input
+										type="checkbox"
+										name={name}
+										onClick={() => {
+											tagFilter({ id });
+										}}
+									/>
+									<label htmlFor={name}>{name}</label>
 								</li>
 							))}
 				</ul>
@@ -122,16 +120,14 @@ export default function Search({ taglist }) {
 							.filter(({ category }) => category == 'Bewegen')
 							.map(({ id, name }) => (
 								<li key={id}>
-									<Link href="#" as="">
-										<a
-											onClick={(e) => {
-												e.preventDefault();
-												tagFilter({ id });
-											}}
-										>
-											{name}
-										</a>
-									</Link>
+									<input
+										type="checkbox"
+										name={name}
+										onClick={() => {
+											tagFilter({ id });
+										}}
+									/>
+									<label htmlFor={name}>{name}</label>
 								</li>
 							))}
 				</ul>
@@ -143,16 +139,14 @@ export default function Search({ taglist }) {
 							.filter(({ category }) => category == 'Infrastructuur')
 							.map(({ id, name }) => (
 								<li key={id}>
-									<Link href="#" as="">
-										<a
-											onClick={(e) => {
-												e.preventDefault();
-												tagFilter({ id });
-											}}
-										>
-											{name}
-										</a>
-									</Link>
+									<input
+										type="checkbox"
+										name={name}
+										onClick={() => {
+											tagFilter({ id });
+										}}
+									/>
+									<label htmlFor={name}>{name}</label>
 								</li>
 							))}
 				</ul>
@@ -164,16 +158,14 @@ export default function Search({ taglist }) {
 							.filter(({ category }) => category == 'Bezienswaardigheden')
 							.map(({ id, name }) => (
 								<li key={id}>
-									<Link href="#" as="">
-										<a
-											onClick={(e) => {
-												e.preventDefault();
-												tagFilter({ id });
-											}}
-										>
-											{name}
-										</a>
-									</Link>
+									<input
+										type="checkbox"
+										name={name}
+										onClick={() => {
+											tagFilter({ id });
+										}}
+									/>
+									<label htmlFor={name}>{name}</label>
 								</li>
 							))}
 				</ul>
@@ -185,16 +177,14 @@ export default function Search({ taglist }) {
 							.filter(({ category }) => category == 'Verharde ondergrond')
 							.map(({ id, name }) => (
 								<li key={id}>
-									<Link href="#" as="">
-										<a
-											onClick={(e) => {
-												e.preventDefault();
-												tagFilter({ id });
-											}}
-										>
-											{name}
-										</a>
-									</Link>
+									<input
+										type="checkbox"
+										name={name}
+										onClick={() => {
+											tagFilter({ id });
+										}}
+									/>
+									<label htmlFor={name}>{name}</label>
 								</li>
 							))}
 				</ul>
@@ -206,16 +196,14 @@ export default function Search({ taglist }) {
 							.filter(({ category }) => category == 'Populariteit')
 							.map(({ id, name }) => (
 								<li key={id}>
-									<Link href="#" as="">
-										<a
-											onClick={(e) => {
-												e.preventDefault();
-												tagFilter({ id });
-											}}
-										>
-											{name}
-										</a>
-									</Link>
+									<input
+										type="checkbox"
+										name={name}
+										onClick={() => {
+											tagFilter({ id });
+										}}
+									/>
+									<label htmlFor={name}>{name}</label>
 								</li>
 							))}
 				</ul>
