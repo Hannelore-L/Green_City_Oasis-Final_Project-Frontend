@@ -13,6 +13,31 @@
 
 /*      _________________________________________________________________      */
 /*      _________________________________________________________________      */
+/*                                             K E Y F R A M E S                                                */
+/*      _________________________________________________________________      */
+/*      _________________________________________________________________      */
+
+@keyframes fadein {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+} //   fadein
+
+@keyframes react-confirm-alert-fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+} //   react-confirm-alert-fadeIn
+
+/*      _________________________________________________________________      */
+/*      _________________________________________________________________      */
 /*                                                     B O D Y                                                      */
 /*      _________________________________________________________________      */
 /*      _________________________________________________________________      */
@@ -93,14 +118,14 @@ header {
 				&:hover {
 					ul {
 						display: block;
-					}
-				}
+					} //   ul
+				} //   :hover
 				.fas {
 					color: white;
 					font-size: 2rem;
 					border: none;
 					cursor: pointer;
-				}
+				} //   .fas
 				ul {
 					display: none;
 					position: absolute;
@@ -118,11 +143,11 @@ header {
 						&:hover {
 							background-color: $green-light;
 							color: $grey-light;
-						}
-					}
-				}
-			}
-		}
+						} //   :hover
+					} //   a
+				} //   ul
+			} //   .dropdown
+		} //   .user_nav
 	} //   nav
 } //   header
 
@@ -225,8 +250,8 @@ header {
 							&:hover {
 								background: $green-light;
 								transition: all 500ms ease;
-							}
-						}
+							} //   :hover
+						} //   .modal
 					} //   a
 				} //   article
 			} //   div.grid_container
@@ -493,6 +518,65 @@ header {
 			} //   section
 		} //   article
 
+		/*      *               *              P R O F I L E               *               *      */
+		aside.profile_header_img {
+			background: $green-dark url('../public/images/profile_header.jpg') bottom center/cover no-repeat fixed;
+			width: 100%;
+			height: 35rem;
+		} //   aside.profile_header_img
+
+		section.profile {
+			article {
+				background-color: $grey-light;
+				position: absolute;
+				top: 30%;
+				left: calc(50% - 400px);
+				width: 800px;
+				padding: 5rem;
+				box-shadow: -2px 2px 10px $shadow-light;
+
+				h2 {
+					@include font(700, 3rem, $primary-font, normal, 2, left 0.2em);
+					color: $green-dark;
+					margin-bottom: 4rem;
+					span {
+						color: $green-light;
+						@include font(700, 3rem, $header-font, normal, 2, left 0.2em);
+					} //   span
+				} //   h2
+				ul {
+					padding: 0 5rem 8rem 5rem;
+					li {
+						display: grid;
+						grid-template-columns: 40% 60%;
+						margin-bottom: 2rem;
+						label {
+							@include font(700, 2rem, $primary-font, normal, 2, left 0.1em);
+							color: $green-light;
+						} //   label
+						p {
+							@include font(40, 1.7rem, $primary-font, normal, 2, left 0.1em);
+							color: $green-dark;
+						} //   p
+					} //   li
+				} //   ul
+				aside {
+					button.delete-profile {
+						background-color: $error;
+						@include font(40, 1.8rem, $primary-font, normal, 2, left 0.1em);
+						color: $faux-white;
+						font-variant: small-caps;
+						position: absolute;
+						bottom: 5rem;
+						right: 5rem;
+						border: none;
+						width: 200px;
+						height: 50px;
+					}
+				}
+			} //   article
+		} //   section.profile
+
 		/*      *               *              R E G I S T E R   &   L O G I N               *               *      */
 		section.form {
 			display: grid;
@@ -604,14 +688,74 @@ header {
 	} //   main
 } //   .maindiv
 
-@keyframes fadein {
-	0% {
-		opacity: 0;
-	}
+.react-confirm-alert {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 40%;
+}
 
-	100% {
-		opacity: 1;
+.react-confirm-alert-body {
+	background: $grey-mid;
+	padding: 5rem;
+	border: 1rem $error double;
+	color: black;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	box-shadow: -10px 10px 20px $shadow-dark;
+	h1 {
+		@include font(700, 3rem, $primary-font, normal, 2, left, 0rem);
+		color: $error;
+		font-variant: small-caps;
 	}
+}
+
+.react-confirm-alert-button-group {
+	display: flex;
+	justify-content: space-evenly;
+	margin-top: 1.5em;
+	width: 100%;
+}
+.react-confirm-alert-button-group button:first-of-type {
+	background: $error;
+	padding: 7px;
+	border: 2px solid $error;
+	color: $faux-white;
+	cursor: pointer;
+	width: 40%;
+	outline-width: 0;
+}
+
+.react-confirm-alert-button-group button {
+	background: $green-mid;
+	border: 0.5rem solid $green-mid;
+	color: $faux-white;
+	cursor: pointer;
+	box-shadow: -2px 2px 10px $shadow-light;
+	margin-top: 10px;
+	width: 40%;
+	outline-width: 0;
+}
+
+body.react-confirm-alert-body-element {
+	overflow: hidden;
+}
+
+.react-confirm-alert-overlay {
+	position: fixed;
+	background-color: $black-sheer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 99;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+	animation: react-confirm-alert-fadeIn 0.2s 0.2s forwards;
 }
 
 /*      _________________________________________________________________      */

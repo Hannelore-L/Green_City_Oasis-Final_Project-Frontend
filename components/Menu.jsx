@@ -61,9 +61,9 @@ export default function Menu() {
 								</Link>
 							</li>
 							<li>
-								<Link href="/">
+								<Link href="#">
 									<a onClick={logout}>Afmelden</a>
-								</Link>{' '}
+								</Link>
 							</li>
 						</ul>
 					</div>

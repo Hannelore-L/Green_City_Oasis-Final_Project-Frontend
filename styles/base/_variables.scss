@@ -13,6 +13,7 @@ $green-light: rgb(110, 140, 83); //   hex  #6E8C53
 //      -               -               G R E E N S :  S H E E R               -               -
 
 $green-light-sheer: rgba(110, 140, 83, 0.6);
+$green-dark-sheer: rgb(23, 38, 1, 0.6); //   hex  #172601
 
 //      -               -               M O N O C H R O M E :  F U L L               -               -
 
@@ -20,6 +21,10 @@ $grey-dark: rgb(210, 210, 210); //   hex  #D2D2D2
 $grey-mid: rgb(225, 225, 225); //   hex  #E1E1E1
 $grey-light: rgb(241, 241, 241); //   hex  #F1F1F1
 $faux-white: rgb(247, 247, 247); //   hex  #F7F7F7
+
+//      -               -               M O N O C H R O M E :  S H E E R               -               -
+
+$black-sheer: rgba(0, 0, 0, 0.8);
 
 //      -               -               S H A D O W               -               -
 
