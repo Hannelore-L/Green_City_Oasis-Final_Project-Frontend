@@ -56,7 +56,7 @@ export default function Index({ locations }) {
 												/>
 											) : (
 												<img
-													src={`/images/logo_placeholder.jpg`}
+													src={`/images/logo_placeholder_1_1.jpg`}
 													alt={`placeholder`}
 												/>
 											)}

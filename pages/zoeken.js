@@ -1,10 +1,18 @@
 //        -        -        -        R E A C T ' S   I M P O R T S        -        -        -
 import React, { useState, useEffect } from 'react';
+import {
+	Accordion,
+	AccordionItem,
+	AccordionItemHeading,
+	AccordionItemButton,
+	AccordionItemPanel,
+} from 'react-accessible-accordion';
 import axios from 'axios';
 import Link from 'next/link';
 
 //        -        -        -        L O C A L   I M P O R T S        -        -        -
 import Layout from '../components/Layout';
+import { slugify } from '../helper';
 
 // //        -        -        -        E X P O R T   S E A R C H        -        -        -
 
@@ -13,6 +21,15 @@ export default function Search({ taglist }) {
 	const [filteredLocations, setFilteredLocations] = useState([]);
 	const [selectedFilters, setSelectedFilters] = useState([]);
 	const [search, setSearch] = useState('');
+
+	const categories = [
+		'Natuur',
+		'Bewegen',
+		'Infrastructuur',
+		'Bezienswaardigheden',
+		'Verharde ondergrond',
+		'Populariteit',
+	];
 
 	useEffect(() => {
 		//   get an array of locations, locations remains unchanged while filteredLocations gets changed
@@ -50,172 +67,156 @@ export default function Search({ taglist }) {
 	//   when filtered by the search bar
 	const searchFilter = () => {
 		if (search != '') {
-			const filteredLocationsBySearch = filteredLocations.filter((location) => {
-				// if the search string is not found in the name AND isn't found in the description, the location should not show, so return false
-				if (location.name.search(search) == -1 && location.description.search(search) == -1) {
-					return false;
-				} else {
+			const filteredLocationsBySearch = locations.filter((location) => {
+				if (
+					location.name.search(search) != -1 ||
+					location.name.search(search.charAt(0).toUpperCase() + search.slice(1)) != -1 ||
+					location.addressText.search(search) != -1 ||
+					location.addressText.search(search.charAt(0).toUpperCase() + search.slice(1)) != -1 ||
+					location.description.search(search) != -1 ||
+					location.description.search(search.charAt(0).toUpperCase() + search.slice(1)) != -1
+				) {
 					return true;
+				} else {
+					return false;
 				} //   end of if else
 			}); //   end of filter
 			setFilteredLocations(filteredLocationsBySearch);
-		} // end ofif (search != '')
+		} // end of if (search != '')
 	}; //   end of searchFilter
+
+	// const handleKeypress = (e) => {
+	// 	if (e.keyCode === 13) {
+	// 		() => {
+	// 			searchFilter();
+	// 		};
+	// 	}
+	// };
+
+	const classToggle = (id) => {
+		const element = document.getElementById(id);
+		element.classList.toggle('fa-square');
+		element.classList.toggle('fa-check-square');
+	};
 
 	return (
 		<Layout title="Green City Oasis || Locaties zoeken" description="U bent op de zoek pagina">
-			<section className="search_desc">
-				<h2>Search</h2>
-				<p>
-					Zoek je de ideale groene oase om wat tijd in door te brengen? Dan ben je hier op het juiste
-					adres! Klik op de filters aan de linker zijde om de selectie te verkleinen! Zie je geen enkel
-					resultaat meer? Probeer dan een filter weg te halen. Ben je naar iets specifiek op zoek? De
-					zoek balk is je beste vriend!
-				</p>
-			</section>
+			<article className="search_page">
+				<section className="search_desc">
+					<h2>Vind de perfecte oase!</h2>
+					<p>
+						Zoek je de ideale groene oase om wat tijd in door te brengen? Dan ben je hier op het
+						juiste adres! Klik op de filters aan de linker zijde om de selectie te verkleinen! Zie je
+						geen enkel resultaat meer? Probeer dan een filter weg te halen. Ben je naar iets specifiek
+						op zoek? De zoek balk is je beste vriend!
+					</p>
+				</section>
 
-			<section className="search_bar">
-				<input
-					type="text"
-					value={search}
-					onChange={(e) => {
-						setSearch(e.target.value);
-					}}
-				/>
-				<button
-					type="button"
-					onClick={() => {
-						searchFilter();
-					}}
-				>
-					Zoek
-				</button>
-			</section>
+				<section className="search_bar">
+					<input
+						type="text"
+						value={search}
+						placeholder="Typ hier je zoekterm!"
+						onChange={(e) => {
+							setSearch(e.target.value);
+						}}
+						// onKeyPress={handleKeypress}
+					/>
+					<button
+						type="button"
+						onClick={() => {
+							searchFilter();
+						}}
+					>
+						<span class="fas fa-search"></span>
+					</button>
+				</section>
 
-			<section className="filters">
-				<h3>Filters:</h3>
-				<h4>Natuur</h4>
-				<ul>
-					{taglist &&
-						taglist
-							.filter(({ category }) => category == 'Natuur')
-							.map(({ id, name }) => (
-								<li key={id}>
-									<input
-										type="checkbox"
-										name={name}
-										onClick={() => {
-											tagFilter({ id });
-										}}
-									/>
-									<label htmlFor={name}>{name}</label>
-								</li>
-							))}
-				</ul>
+				<section className="search_filters">
+					<h3>Filters:</h3>
 
-				<h4>Bewegen</h4>
-				<ul>
-					{taglist &&
-						taglist
-							.filter(({ category }) => category == 'Bewegen')
-							.map(({ id, name }) => (
-								<li key={id}>
-									<input
-										type="checkbox"
-										name={name}
-										onClick={() => {
-											tagFilter({ id });
-										}}
-									/>
-									<label htmlFor={name}>{name}</label>
-								</li>
-							))}
-				</ul>
+					{categories.map((cat) => (
+						<Accordion allowMultipleExpanded allowZeroExpanded preExpanded={categories}>
+							<AccordionItem uuid={cat}>
+								<AccordionItemHeading>
+									<AccordionItemButton>{cat}</AccordionItemButton>
+								</AccordionItemHeading>
+								<AccordionItemPanel>
+									<ul>
+										{taglist &&
+											taglist
+												.filter(({ category }) => category == cat)
+												.map(({ id, name }) => (
+													<li key={id}>
+														<input
+															type="checkbox"
+															id={'check_' + id}
+															onClick={() => {
+																tagFilter({ id });
+															}}
+														/>
+														<label
+															htmlFor={'check_' + id}
+															// className="far fa-square fa-check-square"
+															onClick={() => classToggle(`checkbox_${id}`)}
+														>
+															<span
+																id={`checkbox_${id}`}
+																className="far fa-square"
+															></span>
 
-				<h4>Infrastructuur</h4>
-				<ul>
-					{taglist &&
-						taglist
-							.filter(({ category }) => category == 'Infrastructuur')
-							.map(({ id, name }) => (
-								<li key={id}>
-									<input
-										type="checkbox"
-										name={name}
-										onClick={() => {
-											tagFilter({ id });
-										}}
-									/>
-									<label htmlFor={name}>{name}</label>
-								</li>
-							))}
-				</ul>
+															{name}
+														</label>
+													</li>
+												))}
+									</ul>
+								</AccordionItemPanel>
+							</AccordionItem>
+						</Accordion>
+					))}
+				</section>
 
-				<h4>Bezienswaardigheden</h4>
-				<ul>
-					{taglist &&
-						taglist
-							.filter(({ category }) => category == 'Bezienswaardigheden')
-							.map(({ id, name }) => (
-								<li key={id}>
-									<input
-										type="checkbox"
-										name={name}
-										onClick={() => {
-											tagFilter({ id });
-										}}
-									/>
-									<label htmlFor={name}>{name}</label>
-								</li>
-							))}
-				</ul>
-
-				<h4>Verharde ondergrond</h4>
-				<ul>
-					{taglist &&
-						taglist
-							.filter(({ category }) => category == 'Verharde ondergrond')
-							.map(({ id, name }) => (
-								<li key={id}>
-									<input
-										type="checkbox"
-										name={name}
-										onClick={() => {
-											tagFilter({ id });
-										}}
-									/>
-									<label htmlFor={name}>{name}</label>
-								</li>
-							))}
-				</ul>
-
-				<h4>Populariteit</h4>
-				<ul>
-					{taglist &&
-						taglist
-							.filter(({ category }) => category == 'Populariteit')
-							.map(({ id, name }) => (
-								<li key={id}>
-									<input
-										type="checkbox"
-										name={name}
-										onClick={() => {
-											tagFilter({ id });
-										}}
-									/>
-									<label htmlFor={name}>{name}</label>
-								</li>
-							))}
-				</ul>
-			</section>
-
-			<section className="filtered_locations">
-				<ul>
-					{filteredLocations &&
-						filteredLocations.length > 0 &&
-						filteredLocations.map((location) => <li key={location.id}>{location.name}</li>)}
-				</ul>
-			</section>
+				<section className="filtered_locations">
+					<ul>
+						{filteredLocations && filteredLocations.length > 0 ? (
+							filteredLocations.map((location) => (
+								// <li key={location.id}>{location.name}</li>)
+								<Link
+									href={`/locatie/[id]/[name]?id=${location.id},name=${slugify(
+										location.name
+									)}`}
+									as={`/locatie/${location.id}/${slugify(location.name)}`}
+								>
+									<a key={location.id}>
+										<li>
+											<p>{location.name}</p>
+											{location['images'] && location['images'][0] ? (
+												<img
+													src={`http://wdev.be/wdev_hannelore/eindwerk/system/image.php/green-city-oasis-${slugify(
+														location.name
+													)}-${
+														location['images'][0].id
+													}.jpg?width=300&height=300&cropratio=3:2&image=/wdev_hannelore/eindwerk/system/images/${
+														location['images'][0].fileName
+													}`}
+													alt={`Foto van ${location.name}`}
+												/>
+											) : (
+												<img
+													src={`/images/logo_placeholder_3_2.jpg`}
+													alt={`placeholder`}
+												/>
+											)}
+										</li>
+									</a>
+								</Link>
+							))
+						) : (
+							<p class="no_loc">Er zijn geen locaties gevonden...</p>
+						)}
+					</ul>
+				</section>
+			</article>
 		</Layout>
 	);
 } //   end of export

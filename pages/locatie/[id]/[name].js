@@ -28,7 +28,7 @@ export default function Detail(props) {
 								alt={`Foto van ${props.name}`}
 							/>
 						) : (
-							<img src={`/images/logo_placeholder.jpg`} alt={`placeholder`} />
+							<img src={`/images/logo_placeholder_1_1.jpg`} alt={`placeholder`} />
 						)}
 					</section>
 
