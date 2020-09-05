@@ -1,30 +1,18 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Welcome to Green City Oasis
 
-## Getting Started
+Welcome to the repository of the frontend side of my final project named: Green City Oasis. This project was made to complete the course Full Stack Developer at Syntra.
 
-First, run the development server:
+- The finished product can be found  [here](https://green-city-oasis.vercel.app/).
+- The backend repository can be found [here](https://github.com/Hannelore-L/Green_City_Oasis-Final_Project-Backend).
+- The api documentation can be found [here](https://wdev.be/wdev_hannelore/eindwerk/api).
+- The admin page can be found [here](https://wdev.be/wdev_hannelore/eindwerk/gco_admin/login).
 
-```bash
-npm run dev
-# or
-yarn dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Welkom op Green City Oasis
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Welkom op de repository van de frontend zijde van mijn eindwerk genaamd: Green City Oasis. Dit is het eindwerk voor de voltijdse dagopleiding Full Stack Developer bij Syntra.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [Hier](https://green-city-oasis.vercel.app/) vind je het afgewerkte product
+- [Hier](https://github.com/Hannelore-L/Green_City_Oasis-Final_Project-Backend) kan je de backend repository op GitHub vinden.
+- [Hier](https://wdev.be/wdev_hannelore/eindwerk/api) bevindt zich de api documentatie
+- [Hier](https://wdev.be/wdev_hannelore/eindwerk/gco_admin/login) kan je je inloggen als je een admin bent.
