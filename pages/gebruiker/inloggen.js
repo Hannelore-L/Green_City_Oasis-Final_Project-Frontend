@@ -17,7 +17,7 @@ export default () => {
 		<>
 			<Layout title="Green City Oasis || Inloggen" description="U bent op de inlog pagina">
 				<section className="form ">
-					<aside></aside>
+					<aside className="login_img"></aside>
 					<article>
 						<Formik
 							// validation schema
@@ -86,7 +86,7 @@ export default () => {
 							)}
 						</Formik>
 						<Link href="/gebruiker/registreren">
-							<a>Nog geen account? Registreer je dan hier!</a>
+							<a title="Ga naar de registreer pagina">Nog geen account? Registreer je dan hier!</a>
 						</Link>
 					</article>
 				</section>

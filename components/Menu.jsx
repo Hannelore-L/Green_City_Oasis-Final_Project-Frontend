@@ -42,8 +42,8 @@ export default function Menu() {
 					</li>
 
 					<li>
-						<Link href="/over-ons">
-							<a title="Ga naar de over ons pagina">Over ons</a>
+						<Link href="/over">
+							<a title="Ga naar de pagina over de maker van deze website">Over</a>
 						</Link>
 					</li>
 				</ul>
@@ -56,12 +56,12 @@ export default function Menu() {
 
 						<ul>
 							<li>
-								<Link href="gebruiker/profiel">
+								<Link href="/gebruiker/profiel">
 									<a title="Ga naar je profiel pagina">Profiel</a>
 								</Link>
 							</li>
 							<li>
-								<Link href="#">
+								<Link href="/">
 									<a onClick={logout}>Afmelden</a>
 								</Link>
 							</li>

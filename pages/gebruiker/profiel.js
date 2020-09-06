@@ -9,7 +9,7 @@ import { confirmAlert } from 'react-confirm-alert';
 
 //        -        -        -        L O C A L   I M P O R T S        -        -        -
 import Layout from '../../components/Layout';
-import { slugify, isNotAuthenticated, logout } from '../../helper';
+import { isNotAuthenticated, logout } from '../../helper';
 
 //        -        -        -        E X P O R T   P R O F I L E        -        -        -
 export default function Profile({ user, id }) {

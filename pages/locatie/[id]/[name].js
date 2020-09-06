@@ -1,8 +1,13 @@
 //        -        -        -        R E A C T ' S   I M P O R T S        -        -        -
 import React from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { parseCookies } from 'nookies';
+import jwt_decode from 'jwt-decode';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
 //        -        -        -        L O C A L   I M P O R T S        -        -        -
 import Layout from '../../../components/Layout';
@@ -10,22 +15,47 @@ import { slugify } from '../../../helper';
 
 //        -        -        -        E X P O R T   D E T A I L        -        -        -
 
-export default function Detail(props) {
+export default function Detail({ location, tags }) {
+	const [loggedin, setLoggedin] = useState(false);
+	// const [error, setError] = useState('');
+	const [reviews, setReviews] = useState('');
+
+	// console.log('location');
+	// console.log(location);
+	// console.log('tags');
+	// console.log(tags);
+	// const cookies = parseCookies(ctx);
+	// const decode = jwt_decode(cookies.jwtToken);
+	// const id = decode.id;
+	// const userId = `api/users/${id}`;
+
+	useEffect(() => {
+		const cookies = parseCookies();
+		typeof cookies.jwtToken !== 'undefined' ? setLoggedin(true) : setLoggedin(false);
+
+		axios.get(`https://wdev.be/wdev_hannelore/eindwerk/api/locations/${location.id}`).then((response) => {
+			setReviews(response.data['reviews']);
+		});
+	});
+
 	return (
-		<Layout title={`Green City Oasis || ${props.name}`} description={`Dit is de detail pagina van ${props.name}`}>
+		<Layout
+			title={`Green City Oasis || ${location.name}`}
+			description={`Dit is de detail pagina van ${location.name}`}
+		>
 			<article className="detail">
 				<section className="left_side">
 					<section className="location_image">
-						{props['images'] && props['images'][0] ? (
+						{location['images'] && location['images'][0] ? (
 							<img
 								src={`http://wdev.be/wdev_hannelore/eindwerk/system/image.php/green-city-oasis-${slugify(
-									props.name
+									location.name
 								)}-${
-									props['images'][0].id
+									location['images'][0].id
 								}.jpg?width=350&height=350&cropratio=1:1&image=/wdev_hannelore/eindwerk/system/images/${
-									props['images'][0].fileName
+									location['images'][0].fileName
 								}`}
-								alt={`Foto van ${props.name}`}
+								alt={`Foto van ${location.name}`}
 							/>
 						) : (
 							<img src={`/images/logo_placeholder_1_1.jpg`} alt={`placeholder`} />
@@ -34,57 +64,160 @@ export default function Detail(props) {
 
 					<section className="location_info">
 						<p className="info">Unieke eigenschap: </p>
-						<p>{props.uniqueProperty}</p>
+						<p>{location.uniqueProperty}</p>
 
 						<p className="info">Adres: </p>
-						<p>{props.addressText}</p>
+						<p>{location.addressText}</p>
 
 						<p className="info">Tags:</p>
-						{props['tags'] &&
-							props['tags'].map(({ id, name }) => (
-								<Link
-									href={`/labels/[id]/[name]?id=${id},name=${name}`}
-									as={`/labels/${id}/${name}`}
-								>
-									<a>
-										<p className="tag" key={id}>
-											{name}
-										</p>
-									</a>
-								</Link>
-							))}
+						{tags &&
+							tags.map(
+								(tag) =>
+									tag['locations'] &&
+									tag['locations'].map(
+										(loc) =>
+											loc.id == location.id && (
+												<Link
+													href={`/labels/[id]/[name]?id=${tag.id},name=${tag.name}`}
+													as={`/labels/${tag.id}/${tag.name}`}
+												>
+													<a title="Ga naar een lijst van parken met deze tags">
+														<p className="tag" key={tag.id}>
+															{tag.name}
+														</p>
+													</a>
+												</Link>
+											)
+									)
+							)}
 					</section>
 				</section>
 
 				<section className="right_side">
 					<section className="location_description">
-						<h1>{props.name}</h1>
-						<div className="text" dangerouslySetInnerHTML={{ __html: props.description }} />
+						<h1>{location.name}</h1>
+						<div className="text" dangerouslySetInnerHTML={{ __html: location.description }} />
 					</section>
 
 					<section className="location_review">
-						<p>Reviews</p>
-						<p>.</p>
-						<p>.</p>
-						<p>.</p>
-						<p>.</p>
-						<p>.</p>
-						<p>.</p>
-						<p>.</p>
-						<p>.</p>
-						<p>.</p>
-						<p>.</p>
-						<p>.</p>
-						<p>.</p>
-						<p>.</p>
-						<p>.</p>
-						<p>.</p>
-						<p>.</p>
-						<p>.</p>
-						<p>.</p>
-						<p>.</p>
-						<p>.</p>
-						<p>.</p>
+						<h3>Reviews</h3>
+						<section className="read_reviews">
+							<ul>
+								{(reviews && reviews.isDeleted) || reviews.length == 0 ? (
+									<p>
+										Deze locatie heeft nog geen reviews. Wees de eerste om je ervaring te
+										delen!
+									</p>
+								) : (
+									// location['reviews'].map((review) => (
+									reviews.map((review) => (
+										<li key={review.id}>
+											<p className="review_user">
+												{review['user'] && review['user'].displayName}
+												{review['user'] &&
+												review['user'].city ==
+													'/wdev_hannelore/eindwerk/api/cities/429' ? (
+													<span>Bewoner</span>
+												) : (
+													<span>Bezoeker</span>
+												)}
+											</p>
+											<p>{review.description}</p>
+											<p>
+												<span>{review.createdAt}</span>
+											</p>
+										</li>
+									))
+								)}
+							</ul>
+						</section>
+
+						{/* {(!loggedin && (
+							<p>
+								Wilt U ook Uw menig delen over {location.name}?
+								<Link href="/gebruiker/inloggen">
+									<a title="Ga naar de inlog pagina"> Log U dan in </a>
+								</Link>
+								of
+								<Link href="/gebruiker/registreren">
+									<a title="Ga naar de registreer pagina"> registreer U</a>
+								</Link>
+								!
+							</p>
+						)) || (
+							<>
+								<Formik
+									// validation schema
+									validationSchema={Yup.object({
+										description: Yup.string()
+											.required('U moet Hier iets schrijven.')
+											.min(2, 'Schrijf meer dan 2 tekens, aub.')
+											.max(1000, 'Hou het onder de 1000 tekens, aub'),
+									})}
+									// initial values
+									initialValues={{
+										location: `api/locations/${location.id}`,
+										// user: `${userId}`,
+										user: `api/users/1`,
+										rating: 0,
+										isDeleted: false,
+										description: '',
+									}}
+									// on submit
+									onSubmit={(values) => {
+										axios.post(
+											'https://wdev.be/wdev_hannelore/eindwerk/api/reviews',
+											values
+										)
+											.then(function (response) {
+												console.log(response, 'Bedankt voor Uw review!');
+												console.log('values');
+												console.log(values);
+											})
+											.catch(function (error) {
+												console.log('Onze excuses, Er is iets misgelopen.');
+												console.log('values');
+												console.log(values);
+											});
+									}}
+								>
+									{({ isSubmitting }) => (
+										<Form>
+											<fieldset>
+												<legend>
+													Schrijf je eigen review. Deel je mening, ervaring en
+													herinneringen!
+												</legend>
+												<ul>
+													<li>
+														<Field
+															name="description"
+															type="text"
+															placeholder="Wat wil jij delen?"
+															component="textarea"
+														></Field>
+														<ErrorMessage
+															name="description"
+															component="p"
+															className="error"
+														></ErrorMessage>
+													</li>
+
+													<button
+														type="submit"
+														id="submit_button"
+														disabled={isSubmitting}
+													>
+														Deel!
+													</button>
+												</ul>
+											</fieldset>
+										</Form>
+									)}
+								</Formik>
+							</>
+						)} */}
+						<section></section>
 					</section>
 				</section>
 			</article>
@@ -108,9 +241,11 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-	const res = await axios.get(`https://wdev.be/wdev_hannelore/eindwerk/api/locations/${params.id}`);
+	const resultLocation = await axios.get(`https://wdev.be/wdev_hannelore/eindwerk/api/locations/${params.id}`);
+
+	const resultTags = await axios.get(`https://wdev.be/wdev_hannelore/eindwerk/api/tags`);
 
 	return {
-		props: res.data,
+		props: { location: resultLocation.data, tags: resultTags.data['hydra:member'] },
 	};
 }

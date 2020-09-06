@@ -9,12 +9,15 @@ import Modal from 'react-modal';
 import Layout from '../components/Layout';
 import { slugify } from '../helper';
 
-Modal.setAppElement('#__next');
+// Modal.setAppElement('#__next');
 
 //        -        -        -        E X P O R T   I N D E X        -        -        -
 
-export default function Index({ locations }) {
-	// console.log(locations);
+export default function Index({ locations, images }) {
+	console.log('locations');
+	console.log(locations);
+	console.log('images');
+	console.log(images);
 	return (
 		<Layout title="Green City Oasis || Startpagina" description="U bent op de startpagina">
 			<section id="home_message">
@@ -43,17 +46,38 @@ export default function Index({ locations }) {
 									<a key={location.id}>
 										<p>{location.name}</p>
 										<p className="card_imgs">
-											{location['images'] && location['images'][0] ? (
-												<img
-													src={`http://wdev.be/wdev_hannelore/eindwerk/system/image.php/green-city-oasis-${slugify(
-														location.name
-													)}-${
-														location['images'][0].id
-													}.jpg?width=400&height=400&cropratio=1:1&image=/wdev_hannelore/eindwerk/system/images/${
-														location['images'][0].fileName
-													}`}
-													alt={`Foto van ${location.name}`}
-												/>
+											{images &&
+											images.find(
+												(image) =>
+													image.location ==
+													`/wdev_hannelore/eindwerk/api/locations/${location.id}`
+											) != undefined ? (
+												<>
+													<p>
+														{/* {image.location ==
+															`/wdev_hannelore/eindwerk/api/locations/${location.id}` && (
+															<span>test</span>
+														)} */}
+													</p>
+													<img
+														src={`http://wdev.be/wdev_hannelore/eindwerk/system/image.php/green-city-oasis-${slugify(
+															location.name
+														)}-${
+															images.find(
+																(image) =>
+																	image.location ==
+																	`/wdev_hannelore/eindwerk/api/locations/${location.id}`
+															).id
+														}.jpg?width=400&height=400&cropratio=1:1&image=/wdev_hannelore/eindwerk/system/images/${
+															images.find(
+																(image) =>
+																	image.location ==
+																	`/wdev_hannelore/eindwerk/api/locations/${location.id}`
+															).fileName
+														}`}
+														alt={`Foto van ${location.name}`}
+													/>
+												</>
 											) : (
 												<img
 													src={`/images/logo_placeholder_1_1.jpg`}
@@ -80,12 +104,15 @@ export default function Index({ locations }) {
 
 //        -        -        -        S E R V E R   S I D E   P R O P S        -        -        -
 export const getServerSideProps = async () => {
-	const result = await axios.get(
+	const resultLocations = await axios.get(
 		'https://wdev.be/wdev_hannelore/eindwerk/api/locations?isDeleted=false&order%5BcreatedAt%5D=desc'
 	);
+
+	const resultImages = await axios.get('https://wdev.be/wdev_hannelore/eindwerk/api/images');
 	return {
 		props: {
-			locations: result.data['hydra:member'],
+			locations: resultLocations.data['hydra:member'],
+			images: resultImages.data['hydra:member'],
 		},
 	}; //     end of return
 }; // end of GetStaticProps

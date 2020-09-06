@@ -128,7 +128,7 @@ export default function Search({ taglist }) {
 							searchFilter();
 						}}
 					>
-						<span class="fas fa-search"></span>
+						<span className="fas fa-search"></span>
 					</button>
 				</section>
 
@@ -212,7 +212,7 @@ export default function Search({ taglist }) {
 								</Link>
 							))
 						) : (
-							<p class="no_loc">Er zijn geen locaties gevonden...</p>
+							<p className="no_loc">Er zijn geen locaties gevonden...</p>
 						)}
 					</ul>
 				</section>

@@ -15,7 +15,7 @@ import { isAuthenticated } from '../../helper';
 //        -        -        -        E X P O R T   R E G I S T R E R E N        -        -        -
 export default ({ countries, cities }) => {
 	const [foreign, setForeign] = useState('');
-	const [error, setError] = useState('');
+	const [error, setError] = useState([]);
 
 	const countryList = countries.map((country) => {
 		return { value: `api/countries/${country.id}`, label: `${country.name} ` };
@@ -91,7 +91,7 @@ export default ({ countries, cities }) => {
 														Dit e-mailadres is al in gebruik. Kijk Uw
 														e-mailadres na of{' '}
 														<Link href="/gebruiker/inloggen">
-															<a>log in</a>
+															<a title="Ga naar de inlog pagina">log in</a>
 														</Link>
 														.
 													</p>
@@ -108,7 +108,7 @@ export default ({ countries, cities }) => {
 											// // error = (
 											// // 	<p>
 											// // 		Dit e-mailadres is al in gebruik. Kijk Uw
-											// // 		e-mailadres na of{' '}
+											// // 		e-mailadres na of
 											// // 		<Link href="/gebruiker/inloggen">
 											// // 			<a>log in</a>
 											// // 		</Link>
@@ -127,7 +127,7 @@ export default ({ countries, cities }) => {
 										// 	if (error == 'email: Deze waarde wordt al gebruikt.') {
 										// 		error = <p>
 										// 				Dit e-mailadres is al in gebruik. Kijk Uw
-										// 				e-mailadres na of{' '}
+										// 				e-mailadres na of
 										// 				<Link href="/gebruiker/inloggen">
 										// 					<a>log in</a>
 										// 				</Link>
@@ -317,6 +317,9 @@ export default ({ countries, cities }) => {
 								</Form>
 							)}
 						</Formik>
+						<Link href="/gebruiker/inloggen">
+							<a title="Ga naar de inlog pagina">Heb je al een account? Log je dan hier in!</a>
+						</Link>
 					</article>
 				</section>
 			</Layout>
