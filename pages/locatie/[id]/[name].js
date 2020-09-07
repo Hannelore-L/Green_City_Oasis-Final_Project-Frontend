@@ -116,8 +116,7 @@ export default function Detail({ location, tags, images, users }) {
 						<h3>Reviews</h3>
 						<section className="read_reviews">
 							<ul>
-								{(locationReviews && locationReviews.isDeleted) ||
-								locationReviews.length == 0 ? (
+								{(locationReviews && locationReviews.isDeleted) || !locationReviews.length ? (
 									<p>
 										Deze locatie heeft nog geen reviews. Wees de eerste om je ervaring te
 										delen!
@@ -138,7 +137,10 @@ export default function Detail({ location, tags, images, users }) {
 																	(user) =>
 																		review.user ==
 																			`/wdev_hannelore/eindwerk/api/users/${user.id}` && (
-																			<p className="review_user">
+																			<p
+																				key={user.id}
+																				className="review_user"
+																			>
 																				{user.displayName}
 																				{user.city &&
 																				user.city ==

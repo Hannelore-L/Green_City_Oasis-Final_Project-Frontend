@@ -181,6 +181,7 @@ export default function Search({ taglist, images }) {
 						{filteredLocations && filteredLocations.length > 0 ? (
 							filteredLocations.map((location) => (
 								<Link
+									key={location.id}
 									href={`/locatie/[id]/[name]?id=${location.id},name=${slugify(
 										location.name
 									)}`}

@@ -13,7 +13,7 @@ import { slugify } from '../../../helper';
 export default function TagList({ tags, locations, images }) {
 	return (
 		<Layout
-			title={`Green City Oasis || ${tags && tags[0].name}`}
+			title={`Green City Oasis || ${tags && tags[0] && tags[0].name}`}
 			description={`Dit is de detail pagina van ${tags && tags[0].name}`}
 		>
 			<section className="location_cards">

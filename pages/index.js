@@ -32,7 +32,7 @@ export default function Index({ locations, images }) {
 				<div className="grid_container">
 					{locations &&
 						locations.slice(0, 6).map((location) => (
-							<article>
+							<article key={location.id}>
 								<Link
 									href={`/locatie/[id]/[name]?id=${location.id},name=${slugify(
 										location.name
