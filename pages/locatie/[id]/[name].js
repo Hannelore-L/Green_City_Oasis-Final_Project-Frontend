@@ -47,22 +47,14 @@ export default function Detail({ location, tags, images, users }) {
 			<article className="detail">
 				<section className="left_side">
 					<section className="location_image">
-						{images &&
+						{/* {images &&
 						images.find(
-							(image) => image.location == `/wdev_hannelore/eindwerk/api/locations/${location.id}`
+							(image) => image && image.location == `/wdev_hannelore/eindwerk/api/locations/${location && location.id}`
 						) ? (
 							<img
-								src={`http://wdev.be/wdev_hannelore/eindwerk/system/image.php/green-city-oasis-${slugify(
-									location && location.name
-								)}-${
-									images &&
-									images.find(
-										(image) =>
+								src={`http://wdev.be/wdev_hannelore/eindwerk/system/image.php/green-city-oasis-${slugify( location  && location.name )}-${images && images.find( (image) =>
 											image.location ==
-											`/wdev_hannelore/eindwerk/api/locations/${
-												location && location.id
-											}`
-									).id
+											`/wdev_hannelore/eindwerk/api/locations/${location && location.id}`).id
 								}.jpg?width=350&height=350&cropratio=1:1&image=/wdev_hannelore/eindwerk/system/images/${
 									images &&
 									images.find(
@@ -77,7 +69,7 @@ export default function Detail({ location, tags, images, users }) {
 							/>
 						) : (
 							<img src={`/images/logo_placeholder_1_1.jpg`} alt={`placeholder`} />
-						)}
+						)} */}
 					</section>
 
 					<section className="location_info">
