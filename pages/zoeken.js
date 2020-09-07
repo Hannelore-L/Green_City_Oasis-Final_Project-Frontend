@@ -180,15 +180,14 @@ export default function Search({ taglist, images }) {
 					<ul>
 						{filteredLocations && filteredLocations.length > 0 ? (
 							filteredLocations.map((location) => (
-								// <li key={location.id}>{location.name}</li>)
 								<Link
 									href={`/locatie/[id]/[name]?id=${location.id},name=${slugify(
 										location.name
 									)}`}
 									as={`/locatie/${location.id}/${slugify(location.name)}`}
 								>
-									<a key={location.id}>
-										<li>
+									<a>
+										<li key={location.id}>
 											<p>{location.name}</p>
 											{images &&
 											images.find(
