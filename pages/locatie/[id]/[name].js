@@ -53,23 +53,27 @@ export default function Detail({ location, tags, images, users }) {
 						) ? (
 							<img
 								src={`http://wdev.be/wdev_hannelore/eindwerk/system/image.php/green-city-oasis-${slugify(
-									location.name
+									location && location.name
 								)}-${
 									images &&
 									images.find(
 										(image) =>
 											image.location ==
-											`/wdev_hannelore/eindwerk/api/locations/${location.id}`
+											`/wdev_hannelore/eindwerk/api/locations/${
+												location && location.id
+											}`
 									).id
 								}.jpg?width=350&height=350&cropratio=1:1&image=/wdev_hannelore/eindwerk/system/images/${
 									images &&
 									images.find(
 										(image) =>
 											image.location ==
-											`/wdev_hannelore/eindwerk/api/locations/${location.id}`
+											`/wdev_hannelore/eindwerk/api/locations/${
+												location && location.id
+											}`
 									).fileName
 								}`}
-								alt={`Foto van ${location.name}`}
+								alt={`Foto van ${location && location.name}`}
 							/>
 						) : (
 							<img src={`/images/logo_placeholder_1_1.jpg`} alt={`placeholder`} />
@@ -94,13 +98,15 @@ export default function Detail({ location, tags, images, users }) {
 											parseInt(loc.slice(39), 10) &&
 											parseInt(loc.slice(39), 10) == location.id && (
 												<Link
-													key={tag.id}
-													href={`/labels/[id]/[name]?id=${tag.id},name=${tag.name}`}
-													as={`/labels/${tag.id}/${tag.name}`}
+													key={tag && tag.id}
+													href={`/labels/[id]/[name]?id=${tag && tag.id},name=${
+														tag && tag.name
+													}`}
+													as={`/labels/${tag && tag.id}/${tag && tag.name}`}
 												>
 													<a title="Ga naar een lijst van parken met deze tags">
-														<p className="tag" key={tag.id}>
-															{tag.name}
+														<p className="tag" key={tag && tag.id}>
+															{tag && tag.name}
 														</p>
 													</a>
 												</Link>
