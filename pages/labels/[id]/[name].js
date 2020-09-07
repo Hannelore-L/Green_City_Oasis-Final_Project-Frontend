@@ -13,11 +13,11 @@ import { slugify } from '../../../helper';
 export default function TagList({ tags, locations, images }) {
 	return (
 		<Layout
-			title={`Green City Oasis || ${tags[0].name}`}
-			description={`Dit is de detail pagina van ${tags[0].name}`}
+			title={`Green City Oasis || ${tags && tags[0].name}`}
+			description={`Dit is de detail pagina van ${tags && tags[0].name}`}
 		>
 			<section className="location_cards">
-				<h3>Locaties met het label "{tags[0].name}"</h3>
+				<h3>Locaties met het label "{tags && tags[0].name}"</h3>
 				<div className="grid_container">
 					{tags[0]['locations'] &&
 						tags[0]['locations'].map(
