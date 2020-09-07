@@ -68,7 +68,7 @@ export default function Profile({ user, id }) {
 							<label>E-mail</label>
 							<p>{user.email}</p>
 						</li>
-						<li>
+						{/* <li>
 							<label>Woont in</label>
 							{user.city.id == 2766 ? (
 								<p> {user.country.name}</p>
@@ -77,7 +77,7 @@ export default function Profile({ user, id }) {
 									{user.city.zip} {user.city.name}, {user.country.name}
 								</p>
 							)}
-						</li>
+						</li> */}
 						<li>
 							<label>Lid geworden op</label>
 							<p>
