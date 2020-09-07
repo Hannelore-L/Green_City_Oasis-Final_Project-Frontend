@@ -19,7 +19,8 @@ export default function TagList({ tags, locations, images }) {
 			<section className="location_cards">
 				<h3>Locaties met het label "{tags && tags[0].name}"</h3>
 				<div className="grid_container">
-					{tags[0]['locations'] &&
+					{tags &&
+						tags[0]['locations'] &&
 						tags[0]['locations'].map(
 							(tagloc) =>
 								locations &&

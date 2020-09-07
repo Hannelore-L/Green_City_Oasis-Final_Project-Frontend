@@ -55,12 +55,14 @@ export default function Detail({ location, tags, images, users }) {
 								src={`http://wdev.be/wdev_hannelore/eindwerk/system/image.php/green-city-oasis-${slugify(
 									location.name
 								)}-${
+									images &&
 									images.find(
 										(image) =>
 											image.location ==
 											`/wdev_hannelore/eindwerk/api/locations/${location.id}`
 									).id
 								}.jpg?width=350&height=350&cropratio=1:1&image=/wdev_hannelore/eindwerk/system/images/${
+									images &&
 									images.find(
 										(image) =>
 											image.location ==
@@ -85,6 +87,7 @@ export default function Detail({ location, tags, images, users }) {
 						{tags &&
 							tags.map(
 								(tag) =>
+									tag &&
 									tag['locations'] &&
 									tag['locations'].map(
 										(loc) =>
