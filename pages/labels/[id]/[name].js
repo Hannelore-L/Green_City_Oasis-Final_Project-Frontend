@@ -11,7 +11,6 @@ import { slugify } from '../../../helper';
 //        -        -        -        E X P O R T   T A G   L I S T        -        -        -
 
 export default function TagList({ tags, locations, images }) {
-	console.log(tags);
 	return (
 		<Layout
 			title={`Green City Oasis || ${tags[0].name}`}

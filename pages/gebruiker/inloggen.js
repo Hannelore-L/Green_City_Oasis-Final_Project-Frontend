@@ -12,7 +12,7 @@ import Layout from '../../components/Layout';
 import { isAuthenticated } from '../../helper';
 
 //        -        -        -        E X P O R T   I N L O G G E N        -        -        -
-export default () => {
+export default function Login() {
 	return (
 		<>
 			<Layout title="Green City Oasis || Inloggen" description="U bent op de inlog pagina">
@@ -93,7 +93,7 @@ export default () => {
 			</Layout>
 		</>
 	);
-};
+}
 
 export const getServerSideProps = async (ctx) => {
 	isAuthenticated(ctx, '/');

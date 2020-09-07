@@ -13,7 +13,7 @@ import { InputField } from '../../components/fields/InputField';
 import { isAuthenticated } from '../../helper';
 
 //        -        -        -        E X P O R T   R E G I S T R E R E N        -        -        -
-export default ({ countries, cities }) => {
+export default function Register({ countries, cities }) {
 	const [foreign, setForeign] = useState('');
 	const [error, setError] = useState([]);
 
@@ -325,7 +325,7 @@ export default ({ countries, cities }) => {
 			</Layout>
 		</>
 	);
-};
+}
 
 export const getStaticProps = async (ctx) => {
 	//   is user already logged in
