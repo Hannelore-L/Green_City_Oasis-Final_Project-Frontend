@@ -181,7 +181,7 @@ export default function Detail({ location, tags, images, users }) {
 							</ul>
 						</section>
 
-						{(!loggedin && (
+						{/* {(!loggedin && (
 							<p>
 								Wilt U ook Uw menig delen over {location.name}?
 								<Link href="/gebruiker/inloggen">
@@ -264,7 +264,7 @@ export default function Detail({ location, tags, images, users }) {
 									)}
 								</Formik>
 							</>
-						)}
+						)} */}
 						<section></section>
 					</section>
 				</section>
