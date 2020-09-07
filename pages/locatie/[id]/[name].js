@@ -21,13 +21,6 @@ export default function Detail({ location, tags, images, users }) {
 	const [locationReviews, setLocationReviews] = useState('');
 	const [reviews, setReviews] = useState('');
 
-	console.log('locationReviews');
-	console.log(locationReviews);
-	console.log('reviews');
-	console.log(reviews);
-	console.log('users');
-	console.log(users);
-
 	// const cookies = parseCookies(ctx);
 	// const decode = jwt_decode(cookies.jwtToken);
 	// const id = decode.id;

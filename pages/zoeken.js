@@ -57,10 +57,6 @@ export default function Search({ taglist, images }) {
 		locations.map((location) => {
 			const tagsArray = location['tags'].map((tag) => parseInt(tag.slice(34), 10));
 			const inArrayCheck = (id) => tagsArray.includes(id);
-			console.log('tagsArray');
-			console.log(tagsArray);
-			console.log('selectedFilters');
-			console.log(selectedFilters);
 			if (selectedFilters.every(inArrayCheck)) {
 				filteredLocationsArray.push(location);
 			} //   end of if

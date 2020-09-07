@@ -11,7 +11,6 @@ import Layout from '../components/Layout';
 //        -        -        -        E X P O R T   I N D E X        -        -        -
 
 export default function Index({ locations }) {
-	// console.log(locations);
 	return (
 		<Layout title="Green City Oasis || Startpagina" description="U bent op de startpagina">
 			<article className="over">
