@@ -129,7 +129,7 @@ export default function Detail({ location, tags, images, users }) {
 						<h3>Reviews</h3>
 						<section className="read_reviews">
 							<ul>
-								{/* {(locationReviews && locationReviews.isDeleted) || !locationReviews.length ? (
+								{(locationReviews && locationReviews.isDeleted) || !locationReviews.length ? (
 									<p>
 										Deze locatie heeft nog geen reviews. Wees de eerste om je ervaring te
 										delen!
@@ -177,7 +177,7 @@ export default function Detail({ location, tags, images, users }) {
 													)
 											)
 									)
-								)} */}
+								)}
 							</ul>
 						</section>
 
