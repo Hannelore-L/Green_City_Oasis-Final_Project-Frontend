@@ -14,10 +14,6 @@ import { slugify } from '../helper';
 //        -        -        -        E X P O R T   I N D E X        -        -        -
 
 export default function Index({ locations, images }) {
-	console.log('locations');
-	console.log(locations);
-	console.log('images');
-	console.log(images);
 	return (
 		<Layout title="Green City Oasis || Startpagina" description="U bent op de startpagina">
 			<section id="home_message">
@@ -53,12 +49,6 @@ export default function Index({ locations, images }) {
 													`/wdev_hannelore/eindwerk/api/locations/${location.id}`
 											) != undefined ? (
 												<>
-													<p>
-														{/* {image.location ==
-															`/wdev_hannelore/eindwerk/api/locations/${location.id}` && (
-															<span>test</span>
-														)} */}
-													</p>
 													<img
 														src={`http://wdev.be/wdev_hannelore/eindwerk/system/image.php/green-city-oasis-${slugify(
 															location.name

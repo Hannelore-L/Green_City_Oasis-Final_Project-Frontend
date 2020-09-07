@@ -10,47 +10,71 @@ import { slugify } from '../../../helper';
 
 //        -        -        -        E X P O R T   T A G   L I S T        -        -        -
 
-export default function TagList({ tags }) {
-	console.log(tags);
+export default function TagList({ tags, locations, images }) {
 	return (
 		<Layout title={`Green City Oasis || ${tags.name}`} description={`Dit is de detail pagina van ${tags.name}`}>
 			<section className="location_cards">
 				<h3>Locaties met het label "{tags[0].name}"</h3>
 				<div className="grid_container">
 					{tags[0]['locations'] &&
-						tags[0]['locations'].map((location) => (
-							<article>
-								<Link
-									href={`/locatie/[id]/[name]?id=${location.id},name=${slugify(
-										location.name
-									)}`}
-									as={`/locatie/${location.id}/${slugify(location.name)}`}
-								>
-									<a key={location.id}>
-										<p> {location.name}</p>
-										<p className="card_imgs">
-											{location['images'] && location['images'][0] ? (
-												<img
-													src={`http://wdev.be/wdev_hannelore/eindwerk/system/image.php/green-city-oasis-${slugify(
+						tags[0]['locations'].map(
+							(tagloc) =>
+								locations &&
+								locations.map(
+									(location) =>
+										location &&
+										parseInt(tagloc.slice(39), 10) == location.id && (
+											<article>
+												<Link
+													href={`/locatie/[id]/[name]?id=${
+														location.id
+													},name=${slugify(location.name)}`}
+													as={`/locatie/${location.id}/${slugify(
 														location.name
-													)}-${
-														location['images'][0].id
-													}.jpg?width=200&height=200&cropratio=1:1&image=/wdev_hannelore/eindwerk/system/images/${
-														location['images'][0].fileName
-													}`}
-													alt={`Foto van ${location.name}`}
-												/>
-											) : (
-												<img
-													src={`/images/logo_placeholder_1_1.jpg`}
-													alt={`placeholder`}
-												/>
-											)}
-										</p>
-									</a>
-								</Link>
-							</article>
-						))}
+													)}`}
+												>
+													<a key={location.id}>
+														<p> {location.name}</p>
+														<p className="card_imgs">
+															<p>{images[0].location}</p>
+
+															{images &&
+															images.find(
+																(image) =>
+																	image.location ==
+																	`/wdev_hannelore/eindwerk/api/locations/${location.id}`
+															) ? (
+																<img
+																	src={`http://wdev.be/wdev_hannelore/eindwerk/system/image.php/green-city-oasis-${slugify(
+																		location.name
+																	)}-${
+																		images.find(
+																			(image) =>
+																				image.location ==
+																				`/wdev_hannelore/eindwerk/api/locations/${location.id}`
+																		).id
+																	}.jpg?width=200&height=200&cropratio=1:1&image=/wdev_hannelore/eindwerk/system/images/${
+																		images.find(
+																			(image) =>
+																				image.location ==
+																				`/wdev_hannelore/eindwerk/api/locations/${location.id}`
+																		).fileName
+																	}`}
+																	alt={`Foto van ${location.name}`}
+																/>
+															) : (
+																<img
+																	src={`/images/logo_placeholder_1_1.jpg`}
+																	alt={`placeholder`}
+																/>
+															)}
+														</p>
+													</a>
+												</Link>
+											</article>
+										)
+								)
+						)}
 				</div>
 			</section>
 		</Layout>
@@ -73,11 +97,17 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-	const tagResults = await axios.get(`https://wdev.be/wdev_hannelore/eindwerk/api/tags?name=${params.name}`);
+	const resultTags = await axios.get(`https://wdev.be/wdev_hannelore/eindwerk/api/tags?name=${params.name}`);
+
+	const resultLocations = await axios.get(`https://wdev.be/wdev_hannelore/eindwerk/api/locations`);
+
+	const resultImages = await axios.get(`https://wdev.be/wdev_hannelore/eindwerk/api/images`);
 
 	return {
 		props: {
-			tags: tagResults.data['hydra:member'],
+			tags: resultTags.data['hydra:member'],
+			locations: resultLocations.data['hydra:member'],
+			images: resultImages.data['hydra:member'],
 		},
 	};
 }

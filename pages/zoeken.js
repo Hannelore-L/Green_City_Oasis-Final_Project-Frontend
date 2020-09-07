@@ -16,7 +16,7 @@ import { slugify } from '../helper';
 
 // //        -        -        -        E X P O R T   S E A R C H        -        -        -
 
-export default function Search({ taglist }) {
+export default function Search({ taglist, images }) {
 	const [locations, setLocations] = useState([]);
 	const [filteredLocations, setFilteredLocations] = useState([]);
 	const [selectedFilters, setSelectedFilters] = useState([]);
@@ -55,8 +55,12 @@ export default function Search({ taglist }) {
 
 		const filteredLocationsArray = new Array();
 		locations.map((location) => {
-			const tagsArray = location['tags'].map((tag) => tag.id);
+			const tagsArray = location['tags'].map((tag) => parseInt(tag.slice(34), 10));
 			const inArrayCheck = (id) => tagsArray.includes(id);
+			console.log('tagsArray');
+			console.log(tagsArray);
+			console.log('selectedFilters');
+			console.log(selectedFilters);
 			if (selectedFilters.every(inArrayCheck)) {
 				filteredLocationsArray.push(location);
 			} //   end of if
@@ -190,14 +194,27 @@ export default function Search({ taglist }) {
 									<a key={location.id}>
 										<li>
 											<p>{location.name}</p>
-											{location['images'] && location['images'][0] ? (
+											{images &&
+											images.find(
+												(image) =>
+													image.location ==
+													`/wdev_hannelore/eindwerk/api/locations/${location.id}`
+											) != undefined ? (
 												<img
 													src={`http://wdev.be/wdev_hannelore/eindwerk/system/image.php/green-city-oasis-${slugify(
 														location.name
 													)}-${
-														location['images'][0].id
+														images.find(
+															(image) =>
+																image.location ==
+																`/wdev_hannelore/eindwerk/api/locations/${location.id}`
+														).id
 													}.jpg?width=300&height=300&cropratio=3:2&image=/wdev_hannelore/eindwerk/system/images/${
-														location['images'][0].fileName
+														images.find(
+															(image) =>
+																image.location ==
+																`/wdev_hannelore/eindwerk/api/locations/${location.id}`
+														).fileName
 													}`}
 													alt={`Foto van ${location.name}`}
 												/>
@@ -223,10 +240,13 @@ export default function Search({ taglist }) {
 
 //        -        -        -        S E R V E R   S I D E   P R O P S        -        -        -
 export const getServerSideProps = async () => {
-	const result = await axios.get('https://wdev.be/wdev_hannelore/eindwerk/api/tags');
+	const resultTags = await axios.get('https://wdev.be/wdev_hannelore/eindwerk/api/tags');
+	const resultImages = await axios.get('https://wdev.be/wdev_hannelore/eindwerk/api/images');
+
 	return {
 		props: {
-			taglist: result.data['hydra:member'],
+			taglist: resultTags.data['hydra:member'],
+			images: resultImages.data['hydra:member'],
 		},
 	}; //     end of return
-}; // end of GetStaticProps
+}; // end of GetServerSideProps

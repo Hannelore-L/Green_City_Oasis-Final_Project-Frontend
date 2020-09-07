@@ -15,15 +15,11 @@ import { slugify } from '../../../helper';
 
 //        -        -        -        E X P O R T   D E T A I L        -        -        -
 
-export default function Detail({ location, tags }) {
+export default function Detail({ location, tags, images }) {
 	const [loggedin, setLoggedin] = useState(false);
 	// const [error, setError] = useState('');
 	const [reviews, setReviews] = useState('');
 
-	// console.log('location');
-	// console.log(location);
-	// console.log('tags');
-	// console.log(tags);
 	// const cookies = parseCookies(ctx);
 	// const decode = jwt_decode(cookies.jwtToken);
 	// const id = decode.id;
@@ -36,7 +32,7 @@ export default function Detail({ location, tags }) {
 		axios.get(`https://wdev.be/wdev_hannelore/eindwerk/api/locations/${location.id}`).then((response) => {
 			setReviews(response.data['reviews']);
 		});
-	});
+	}, []);
 
 	return (
 		<Layout
@@ -46,14 +42,24 @@ export default function Detail({ location, tags }) {
 			<article className="detail">
 				<section className="left_side">
 					<section className="location_image">
-						{location['images'] && location['images'][0] ? (
+						{images.find(
+							(image) => image.location == `/wdev_hannelore/eindwerk/api/locations/${location.id}`
+						) ? (
 							<img
 								src={`http://wdev.be/wdev_hannelore/eindwerk/system/image.php/green-city-oasis-${slugify(
 									location.name
 								)}-${
-									location['images'][0].id
+									images.find(
+										(image) =>
+											image.location ==
+											`/wdev_hannelore/eindwerk/api/locations/${location.id}`
+									).id
 								}.jpg?width=350&height=350&cropratio=1:1&image=/wdev_hannelore/eindwerk/system/images/${
-									location['images'][0].fileName
+									images.find(
+										(image) =>
+											image.location ==
+											`/wdev_hannelore/eindwerk/api/locations/${location.id}`
+									).fileName
 								}`}
 								alt={`Foto van ${location.name}`}
 							/>
@@ -76,7 +82,8 @@ export default function Detail({ location, tags }) {
 									tag['locations'] &&
 									tag['locations'].map(
 										(loc) =>
-											loc.id == location.id && (
+											parseInt(loc.slice(39), 10) &&
+											parseInt(loc.slice(39), 10) == location.id && (
 												<Link
 													href={`/labels/[id]/[name]?id=${tag.id},name=${tag.name}`}
 													as={`/labels/${tag.id}/${tag.name}`}
@@ -245,7 +252,13 @@ export async function getStaticProps({ params }) {
 
 	const resultTags = await axios.get(`https://wdev.be/wdev_hannelore/eindwerk/api/tags`);
 
+	const resultImages = await axios.get(`https://wdev.be/wdev_hannelore/eindwerk/api/images`);
+
 	return {
-		props: { location: resultLocation.data, tags: resultTags.data['hydra:member'] },
+		props: {
+			location: resultLocation.data,
+			tags: resultTags.data['hydra:member'],
+			images: resultImages.data['hydra:member'],
+		},
 	};
 }
