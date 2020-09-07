@@ -181,9 +181,9 @@ export default function Detail({ location, tags, images, users }) {
 							</ul>
 						</section>
 
-						{/* {(!loggedin && (
+						{(!loggedin && (
 							<p>
-								Wilt U ook Uw menig delen over {location.name}?
+								Wilt U ook Uw menig delen over {location && location.name}?
 								<Link href="/gebruiker/inloggen">
 									<a title="Ga naar de inlog pagina"> Log U dan in </a>
 								</Link>
@@ -221,7 +221,7 @@ export default function Detail({ location, tags, images, users }) {
 											.then(function (response) {
 												console.log(response, 'Bedankt voor Uw review!');
 												window.location = `/locatie/${location.id}/${slugify(
-													location.name
+													location && location.name
 												)}`;
 											})
 											.catch(function (error) {
@@ -264,7 +264,7 @@ export default function Detail({ location, tags, images, users }) {
 									)}
 								</Formik>
 							</>
-						)} */}
+						)}
 						<section></section>
 					</section>
 				</section>
