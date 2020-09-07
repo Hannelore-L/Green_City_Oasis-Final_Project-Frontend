@@ -121,8 +121,11 @@ export default function Detail({ location, tags, images, users }) {
 
 				<section className="right_side">
 					<section className="location_description">
-						{/* <h1>{location.name}</h1>
-						<div className="text" dangerouslySetInnerHTML={{ __html: location.description }} /> */}
+						<h1>{locationReviews && location.name}</h1>
+						<div
+							className="text"
+							dangerouslySetInnerHTML={{ __html: locationReviews && location.description }}
+						/>
 					</section>
 
 					<section className="location_review">
