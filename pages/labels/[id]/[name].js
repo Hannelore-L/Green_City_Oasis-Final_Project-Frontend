@@ -11,6 +11,7 @@ import { slugify } from '../../../helper';
 //        -        -        -        E X P O R T   T A G   L I S T        -        -        -
 
 export default function TagList({ tags, locations, images }) {
+	console.log(tags);
 	return (
 		<Layout
 			title={`Green City Oasis || ${tags[0].name}`}
@@ -27,7 +28,7 @@ export default function TagList({ tags, locations, images }) {
 									(location) =>
 										location &&
 										parseInt(tagloc.slice(39), 10) == location.id && (
-											<article>
+											<article key={location.id}>
 												<Link
 													href={`/locatie/[id]/[name]?id=${
 														location.id
@@ -39,8 +40,6 @@ export default function TagList({ tags, locations, images }) {
 													<a key={location.id}>
 														<p> {location.name}</p>
 														<p className="card_imgs">
-															<p>{images[0].location}</p>
-
 															{images &&
 															images.find(
 																(image) =>
