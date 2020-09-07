@@ -77,9 +77,9 @@ export default function Index({ locations, images }) {
 										</p>
 									</a>
 								</Link>
-								<Link href={`/`} as={`/`}>
+								{/* <Link href={`/`} as={`/`}>
 									<a className="modal">Toon op de kaart</a>
-								</Link>
+								</Link> */}
 							</article>
 						))}
 				</div>

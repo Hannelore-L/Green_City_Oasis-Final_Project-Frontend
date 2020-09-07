@@ -15,10 +15,18 @@ import { slugify } from '../../../helper';
 
 //        -        -        -        E X P O R T   D E T A I L        -        -        -
 
-export default function Detail({ location, tags, images }) {
+export default function Detail({ location, tags, images, users }) {
 	const [loggedin, setLoggedin] = useState(false);
 	// const [error, setError] = useState('');
+	const [locationReviews, setLocationReviews] = useState('');
 	const [reviews, setReviews] = useState('');
+
+	console.log('locationReviews');
+	console.log(locationReviews);
+	console.log('reviews');
+	console.log(reviews);
+	console.log('users');
+	console.log(users);
 
 	// const cookies = parseCookies(ctx);
 	// const decode = jwt_decode(cookies.jwtToken);
@@ -30,7 +38,11 @@ export default function Detail({ location, tags, images }) {
 		typeof cookies.jwtToken !== 'undefined' ? setLoggedin(true) : setLoggedin(false);
 
 		axios.get(`https://wdev.be/wdev_hannelore/eindwerk/api/locations/${location.id}`).then((response) => {
-			setReviews(response.data['reviews']);
+			setLocationReviews(response.data['reviews']);
+		});
+
+		axios.get(`https://wdev.be/wdev_hannelore/eindwerk/api/reviews`).then((response) => {
+			setReviews(response.data['hydra:member']);
 		});
 	}, []);
 
@@ -110,36 +122,57 @@ export default function Detail({ location, tags, images }) {
 						<h3>Reviews</h3>
 						<section className="read_reviews">
 							<ul>
-								{(reviews && reviews.isDeleted) || reviews.length == 0 ? (
+								{(locationReviews && locationReviews.isDeleted) ||
+								locationReviews.length == 0 ? (
 									<p>
 										Deze locatie heeft nog geen reviews. Wees de eerste om je ervaring te
 										delen!
 									</p>
 								) : (
-									// location['reviews'].map((review) => (
-									reviews.map((review) => (
-										<li key={review.id}>
-											<p className="review_user">
-												{review['user'] && review['user'].displayName}
-												{review['user'] &&
-												review['user'].city ==
-													'/wdev_hannelore/eindwerk/api/cities/429' ? (
-													<span>Bewoner</span>
-												) : (
-													<span>Bezoeker</span>
-												)}
-											</p>
-											<p>{review.description}</p>
-											<p>
-												<span>{review.createdAt}</span>
-											</p>
-										</li>
-									))
+									reviews &&
+									reviews.map(
+										(review) =>
+											locationReviews &&
+											locationReviews.map(
+												(locrev) =>
+													locrev &&
+													locrev ==
+														`/wdev_hannelore/eindwerk/api/reviews/${review.id}` && (
+														<li key={review.id}>
+															{users &&
+																users.map(
+																	(user) =>
+																		review.user ==
+																			`/wdev_hannelore/eindwerk/api/users/${user.id}` && (
+																			<p className="review_user">
+																				{user.displayName}
+																				{user.city &&
+																				user.city ==
+																					'/wdev_hannelore/eindwerk/api/cities/429' ? (
+																					<span>
+																						Bewoner
+																					</span>
+																				) : (
+																					<span>
+																						Bezoeker
+																					</span>
+																				)}
+																			</p>
+																		)
+																)}
+															<p>{review.description}</p>
+															<p>
+																<span>{review.createdAt}</span>
+															</p>
+														</li>
+													)
+											)
+									)
 								)}
 							</ul>
 						</section>
 
-						{/* {(!loggedin && (
+						{(!loggedin && (
 							<p>
 								Wilt U ook Uw menig delen over {location.name}?
 								<Link href="/gebruiker/inloggen">
@@ -178,13 +211,12 @@ export default function Detail({ location, tags, images }) {
 										)
 											.then(function (response) {
 												console.log(response, 'Bedankt voor Uw review!');
-												console.log('values');
-												console.log(values);
+												window.location = `/locatie/${location.id}/${slugify(
+													location.name
+												)}`;
 											})
 											.catch(function (error) {
 												console.log('Onze excuses, Er is iets misgelopen.');
-												console.log('values');
-												console.log(values);
 											});
 									}}
 								>
@@ -223,7 +255,7 @@ export default function Detail({ location, tags, images }) {
 									)}
 								</Formik>
 							</>
-						)} */}
+						)}
 						<section></section>
 					</section>
 				</section>
@@ -254,11 +286,14 @@ export async function getStaticProps({ params }) {
 
 	const resultImages = await axios.get(`https://wdev.be/wdev_hannelore/eindwerk/api/images`);
 
+	const resultUsers = await axios.get(`https://wdev.be/wdev_hannelore/eindwerk/api/users`);
+
 	return {
 		props: {
 			location: resultLocation.data,
 			tags: resultTags.data['hydra:member'],
 			images: resultImages.data['hydra:member'],
+			users: resultUsers.data['hydra:member'],
 		},
 	};
 }
