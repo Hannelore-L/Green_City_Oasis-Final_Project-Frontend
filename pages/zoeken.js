@@ -31,6 +31,8 @@ export default function Search({ taglist, images }) {
 		'Populariteit',
 	];
 
+	console.log(filteredLocations);
+
 	useEffect(() => {
 		//   get an array of locations, locations remains unchanged while filteredLocations gets changed
 		axios.get('https://wdev.be/wdev_hannelore/eindwerk/api/locations?isDeleted=false').then((response) => {
