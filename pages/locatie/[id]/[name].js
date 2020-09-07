@@ -41,13 +41,14 @@ export default function Detail({ location, tags, images, users }) {
 
 	return (
 		<Layout
-			title={`Green City Oasis || ${location.name}`}
-			description={`Dit is de detail pagina van ${location.name}`}
+			title={`Green City Oasis || ${location && location.name}`}
+			description={`Dit is de detail pagina van ${location && location.name}`}
 		>
 			<article className="detail">
 				<section className="left_side">
 					<section className="location_image">
-						{images.find(
+						{images &&
+						images.find(
 							(image) => image.location == `/wdev_hannelore/eindwerk/api/locations/${location.id}`
 						) ? (
 							<img
