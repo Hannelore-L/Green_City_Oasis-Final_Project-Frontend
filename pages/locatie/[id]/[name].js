@@ -91,7 +91,7 @@ export default function Detail({ location, tags, images, users }) {
 						<p>{location && location.addressText}</p>
 
 						<p className="info">Tags:</p>
-						{/* {tags &&
+						{tags &&
 							tags.map(
 								(tag) =>
 									tag &&
@@ -115,21 +115,21 @@ export default function Detail({ location, tags, images, users }) {
 												</Link>
 											)
 									)
-							)} */}
+							)}
 					</section>
 				</section>
 
 				<section className="right_side">
 					<section className="location_description">
-						<h1>{location.name}</h1>
-						<div className="text" dangerouslySetInnerHTML={{ __html: location.description }} />
+						{/* <h1>{location.name}</h1>
+						<div className="text" dangerouslySetInnerHTML={{ __html: location.description }} /> */}
 					</section>
 
 					<section className="location_review">
 						<h3>Reviews</h3>
 						<section className="read_reviews">
 							<ul>
-								{(locationReviews && locationReviews.isDeleted) || !locationReviews.length ? (
+								{/* {(locationReviews && locationReviews.isDeleted) || !locationReviews.length ? (
 									<p>
 										Deze locatie heeft nog geen reviews. Wees de eerste om je ervaring te
 										delen!
@@ -177,7 +177,7 @@ export default function Detail({ location, tags, images, users }) {
 													)
 											)
 									)
-								)}
+								)} */}
 							</ul>
 						</section>
 
