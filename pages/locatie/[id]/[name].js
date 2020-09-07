@@ -76,10 +76,10 @@ export default function Detail({ location, tags, images, users }) {
 
 					<section className="location_info">
 						<p className="info">Unieke eigenschap: </p>
-						<p>{location.uniqueProperty}</p>
+						<p>{location && location.uniqueProperty}</p>
 
 						<p className="info">Adres: </p>
-						<p>{location.addressText}</p>
+						<p>{location && location.addressText}</p>
 
 						<p className="info">Tags:</p>
 						{tags &&
