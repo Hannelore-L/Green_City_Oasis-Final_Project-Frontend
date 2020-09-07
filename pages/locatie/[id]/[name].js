@@ -91,6 +91,7 @@ export default function Detail({ location, tags, images, users }) {
 											parseInt(loc.slice(39), 10) &&
 											parseInt(loc.slice(39), 10) == location.id && (
 												<Link
+													key={tag.id}
 													href={`/labels/[id]/[name]?id=${tag.id},name=${tag.name}`}
 													as={`/labels/${tag.id}/${tag.name}`}
 												>

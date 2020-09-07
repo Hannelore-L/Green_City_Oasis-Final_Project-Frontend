@@ -136,7 +136,7 @@ export default function Search({ taglist, images }) {
 					<h3>Filters:</h3>
 
 					{categories.map((cat) => (
-						<Accordion allowMultipleExpanded allowZeroExpanded preExpanded={categories}>
+						<Accordion allowMultipleExpanded allowZeroExpanded preExpanded={categories} key={cat}>
 							<AccordionItem uuid={cat}>
 								<AccordionItemHeading>
 									<AccordionItemButton>{cat}</AccordionItemButton>
